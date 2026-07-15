@@ -1,0 +1,475 @@
+<title>Creatine, Beyond the Gym: The Supplement You Thought You Knew, Weighed Honestly - BlessUp</title>
+<!--
+  BlessUp interactive report - "Creatine, Beyond the Gym" (hype vs evidence). Thick Blood layout
+  re-skinned to a graphite + ember-copper "cellular energy" palette. Interactive goal-by-goal
+  evidence selector. ASCII + HTML entities only. Education only. No vendor names. No use-claims.
+  Two-sided. No em dashes. All PMIDs PubMed-verified 2026-07-15.
+-->
+<style>
+  :root{
+    --paper:#F5F1EA; --surface:#FCFAF5; --surface-2:#ECE4D8;
+    --ink:#211B14; --ink-soft:#45392D; --muted:#6E6153;
+    --line:#DCD2C2; --line-soft:#E8E0D3;
+    --blood:#B0531F; --blood-deep:#8A3D12; --blood-tint:#F1DCC9;   /* ember copper = primary */
+    --plasma:#3A6E82; --plasma-soft:#AFC9D3; --plasma-tint:#D8E5EA; /* charged steel = energy accent */
+    --good:#3E7A4C; --good-tint:#DBEBDD;
+    --amber:#93650F; --amber-tint:#F2E6C6;
+    --danger:#A83A34; --danger-deep:#872A26; --danger-tint:#F3DCDA;
+    --serif:"Charter","Cambria","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:"Seravek","Segoe UI","Avenir Next","Helvetica Neue",system-ui,sans-serif;
+    --mono:ui-monospace,"Cascadia Code","SF Mono",Consolas,"Liberation Mono",monospace;
+    --wrap:740px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#141009; --surface:#1B160E; --surface-2:#231D13;
+      --ink:#EEE7DA; --ink-soft:#CDC2B0; --muted:#8C8071;
+      --line:#302819; --line-soft:#241E12;
+      --blood:#DB8149; --blood-deep:#EFA06A; --blood-tint:#2A1B0F;
+      --plasma:#7BA9BB; --plasma-soft:#173039; --plasma-tint:#132229;
+      --good:#5EA972; --good-tint:#13271A;
+      --amber:#D19A45; --amber-tint:#2A2010;
+      --danger:#DE7670; --danger-deep:#EC948E; --danger-tint:#2E1513;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#141009; --surface:#1B160E; --surface-2:#231D13;
+    --ink:#EEE7DA; --ink-soft:#CDC2B0; --muted:#8C8071;
+    --line:#302819; --line-soft:#241E12;
+    --blood:#DB8149; --blood-deep:#EFA06A; --blood-tint:#2A1B0F;
+    --plasma:#7BA9BB; --plasma-soft:#173039; --plasma-tint:#132229;
+    --good:#5EA972; --good-tint:#13271A;
+    --amber:#D19A45; --amber-tint:#2A2010;
+    --danger:#DE7670; --danger-deep:#EC948E; --danger-tint:#2E1513;
+  }
+  :root[data-theme="light"]{
+    --paper:#F5F1EA; --surface:#FCFAF5; --surface-2:#ECE4D8;
+    --ink:#211B14; --ink-soft:#45392D; --muted:#6E6153;
+    --line:#DCD2C2; --line-soft:#E8E0D3;
+    --blood:#B0531F; --blood-deep:#8A3D12; --blood-tint:#F1DCC9;
+    --plasma:#3A6E82; --plasma-soft:#AFC9D3; --plasma-tint:#D8E5EA;
+    --good:#3E7A4C; --good-tint:#DBEBDD;
+    --amber:#93650F; --amber-tint:#F2E6C6;
+    --danger:#A83A34; --danger-deep:#872A26; --danger-tint:#F3DCDA;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;background:var(--paper)}
+  body{margin:0;background:var(--paper)}
+  .page{position:relative;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.64;-webkit-font-smoothing:antialiased}
+  .page *{box-sizing:border-box}
+  ::selection{background:var(--blood-tint);color:var(--blood-deep)}
+  .prog{position:fixed;top:0;left:0;height:3px;width:0%;z-index:50;background:linear-gradient(90deg,var(--blood-deep),var(--plasma));transition:width .1s linear}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .band{padding:66px 0}
+  .band--tint{background:var(--surface-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+  .band--ink{background:#120E08;color:#EEE7DA;border-top:1px solid #2A2216;border-bottom:1px solid #2A2216}
+
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;text-wrap:balance;line-height:1.14;letter-spacing:-.005em}
+  h2{font-size:clamp(27px,4.4vw,38px);margin:0 0 .5em}
+  h3{font-size:clamp(21px,3vw,26px);margin:2.1em 0 .5em;line-height:1.2}
+  h4{font-size:19px;margin:1.6em 0 .3em;font-family:var(--sans);font-weight:700;letter-spacing:0}
+  p{margin:0 0 1.05em;max-width:66ch}
+  a{color:var(--blood);text-underline-offset:2px;text-decoration-thickness:1px}
+  a:hover{color:var(--blood-deep)}
+  strong{font-weight:700;color:var(--ink)}
+  em{font-style:italic}
+  .band--ink strong{color:#fff}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--blood);margin:0 0 14px;font-weight:600;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+  .lede{font-size:clamp(19px,2.5vw,22px);line-height:1.55;color:var(--ink-soft)}
+  .small{font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .src{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--muted);margin-top:10px}
+  ul,ol{margin:0 0 1.1em;padding-left:1.25em;max-width:66ch}
+  li{margin:.34em 0}
+  li::marker{color:var(--blood)}
+
+  .hero{padding:60px 0 52px;border-bottom:1px solid var(--line)}
+  .hero h1{font-size:clamp(40px,7.4vw,68px);margin:.04em 0 .3em;letter-spacing:-.02em;line-height:1.02;color:var(--blood-deep)}
+  .hero .thesis{font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.6vw,23px);color:var(--blood-deep);max-width:44ch;margin:.4em 0 0}
+  .herofig{margin:30px 0 4px}
+  .herofig svg{width:100%;height:auto;display:block}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:34px 0 0;border-top:1px solid var(--line);padding-top:26px}
+  .stat{padding:0 22px}.stat:first-child{padding-left:0}
+  .stat+ .stat{border-left:1px solid var(--line)}
+  .stat .n{font-family:var(--serif);font-size:clamp(28px,4.6vw,42px);font-weight:600;color:var(--blood);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  .stat .n small{font-size:.42em;color:var(--ink-soft);font-weight:400}
+  .stat .lbl{font-size:12.5px;color:var(--muted);margin-top:11px;line-height:1.45}
+  @media(max-width:560px){.stats{grid-template-columns:1fr}.stat{padding:15px 0}.stat:first-child{padding-top:0}.stat+ .stat{border-left:0;border-top:1px solid var(--line)}}
+
+  .note{border-left:3px solid var(--plasma);background:var(--plasma-tint);padding:16px 20px;border-radius:0 6px 6px 0;margin:1.6em 0}
+  .note.blood{border-left-color:var(--blood);background:var(--blood-tint)}
+  .note.good{border-left-color:var(--good);background:var(--good-tint)}
+  .note.amber{border-left-color:var(--amber);background:var(--amber-tint)}
+  .note.danger{border-left-color:var(--danger);background:var(--danger-tint)}
+  .note p{margin:0;max-width:none}
+  .note .h{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 6px;color:var(--ink-soft)}
+
+  /* interactive goal selector */
+  .checker{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:24px;margin:1.8em 0;box-shadow:0 8px 30px rgba(25,18,10,.06)}
+  .checker .ctitle{font-family:var(--sans);font-weight:700;font-size:18px;margin:0 0 3px}
+  .checker .csub{font-size:13.5px;color:var(--muted);margin:0 0 16px}
+  .claims{display:flex;flex-wrap:wrap;gap:8px}
+  .claims button{font-family:var(--sans);font-size:14px;padding:9px 14px;border:1px solid var(--line);border-radius:22px;background:var(--paper);color:var(--ink-soft);cursor:pointer;transition:.15s}
+  .claims button:hover{border-color:var(--blood)}
+  .claims button[aria-pressed="true"]{background:var(--blood);border-color:var(--blood);color:#fff;font-weight:600}
+  .verdict{margin-top:16px;border-radius:8px;padding:16px 18px;border:1px solid var(--line);background:var(--surface-2)}
+  .verdict .vb{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin:0 0 5px;display:flex;align-items:center;gap:8px}
+  .verdict .dotv{width:10px;height:10px;border-radius:50%}
+  .verdict p{margin:0;font-size:15px;max-width:none}
+  .v-proven .vb{color:var(--good)}.v-proven .dotv{background:var(--good)}
+  .v-mixed .vb{color:var(--amber)}.v-mixed .dotv{background:var(--amber)}
+  .v-unproven .vb{color:var(--danger)}.v-unproven .dotv{background:var(--danger)}
+
+  .chart{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:24px 24px 20px;margin:1.8em 0}
+  .chart .ctitle{font-family:var(--sans);font-weight:700;font-size:17px;margin:0 0 4px}
+  .chart .csub{font-size:13.5px;color:var(--muted);margin:0 0 18px}
+  .bars{display:flex;flex-direction:column;gap:14px}
+  .bar-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center}
+  .bar-lbl{font-size:14px;text-align:right;color:var(--ink-soft);line-height:1.2}
+  .bar-track{position:relative;background:var(--surface-2);border-radius:4px;height:30px;overflow:hidden}
+  .bar-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:4px;transition:width 1.1s cubic-bezier(.3,0,.2,1);display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:var(--mono);font-size:12.5px;color:#fff;font-weight:600}
+  .bar-fill.bp{background:linear-gradient(90deg,#7a3a12,var(--blood))}
+  @media(max-width:560px){.bar-row{grid-template-columns:1fr;gap:4px}.bar-lbl{text-align:left}}
+
+  .grade{display:grid;grid-template-columns:132px 1fr;gap:0;border:1px solid var(--line);border-radius:7px;overflow:hidden;margin:10px 0;background:var(--surface)}
+  .grade .g{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-align:center;padding:14px 10px;color:#fff;line-height:1.25}
+  .g-proven{background:var(--good)}.g-mixed{background:var(--amber)}.g-unproven{background:var(--danger)}
+  .grade .gc{padding:14px 18px}.grade .gc h4{margin:0 0 3px;font-size:16px}.grade .gc p{margin:0;font-size:14px;color:var(--ink-soft);max-width:none}
+  @media(max-width:520px){.grade{grid-template-columns:1fr}.grade .g{padding:8px}}
+
+  .lever{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin:16px 0}
+  .lever .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:2px}
+  .lever h3{margin:0;font-size:21px}
+  .lever .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:4px 9px;border-radius:4px;white-space:nowrap}
+  .tag.pro{background:var(--good-tint);color:var(--good)}.tag.con{background:var(--danger-tint);color:var(--danger-deep)}
+  .lever .mech{font-size:14.5px;color:var(--muted);margin:.3em 0 1em}
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line-soft)}
+  .pc .col{padding:14px 16px 6px}.pc .col.pro{border-right:1px solid var(--line-soft)}
+  .pc .col .lab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+  .pc .pro .lab{color:var(--good)}.pc .con .lab{color:var(--danger-deep)}
+  .pc ul{font-size:14px;padding-left:1.1em;margin:0 0 8px;max-width:none}.pc li{margin:.3em 0;color:var(--ink-soft)}
+  @media(max-width:600px){.pc{grid-template-columns:1fr}.pc .col.pro{border-right:none;border-bottom:1px solid var(--line-soft)}}
+
+  .checks{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 22px;margin:1.2em 0}
+  .checks .row{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line-soft);align-items:flex-start}
+  .checks .row:last-child{border-bottom:0}
+  .checks .box{flex:0 0 18px;width:18px;height:18px;border:2px solid var(--blood);border-radius:3px;margin-top:3px}
+  .checks .row p{margin:0;font-size:15.5px}
+
+  .sources{font-size:13.5px;line-height:1.5}
+  .sources ol{max-width:none;padding-left:1.6em}
+  .sources li{margin:.55em 0;color:var(--ink-soft)}.sources a{word-break:break-word}
+  .footer{padding:40px 0 60px;text-align:center}
+  .footer .sig{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--blood-deep)}
+  .themebtn{position:fixed;right:14px;bottom:14px;z-index:60;font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;background:var(--surface);color:var(--ink-soft);border:1px solid var(--line);border-radius:5px;padding:8px 13px;cursor:pointer;box-shadow:0 3px 12px rgba(25,18,10,.14)}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="page">
+<div class="prog" id="prog"></div>
+<button class="themebtn" id="themebtn" type="button" aria-label="Toggle light or dark">Theme</button>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">The Supplement Library &middot; Energy, Muscle &amp; the Brain</p>
+    <h1>Creatine, Beyond the Gym</h1>
+    <p class="lede" style="max-width:46ch;margin:.1em 0 .5em">The most-studied supplement on the shelf just got a second life as a brain and longevity pill. Here is what is actually proven, and what is just the trend talking.</p>
+    <p class="thesis">Rock solid for what it was always known for. Genuinely promising for a few new things. And, like everything that goes viral, oversold for the rest. The whole skill is telling those three apart.</p>
+
+    <div class="herofig" aria-hidden="true">
+      <svg viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg" role="img">
+        <defs>
+          <linearGradient id="cop" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" style="stop-color:var(--blood)"/><stop offset="1" style="stop-color:var(--blood-deep)"/>
+          </linearGradient>
+        </defs>
+        <!-- recharge arc -->
+        <path d="M360 44 A86 86 0 1 1 274 130" fill="none" style="stroke:var(--plasma)" stroke-width="2.4" stroke-dasharray="5 7" opacity="0.85"/>
+        <path d="M360 44 l-13 -9 l4 15 z" style="fill:var(--plasma)"/>
+        <text x="360" y="24" text-anchor="middle" font-size="12" letter-spacing="1.5" style="fill:var(--plasma);font-family:var(--mono)">PHOSPHOCREATINE RECHARGE</text>
+        <!-- central battery -->
+        <g>
+          <rect x="316" y="96" width="88" height="58" rx="9" fill="none" style="stroke:var(--blood)" stroke-width="2.6"/>
+          <rect x="404" y="112" width="9" height="26" rx="3" style="fill:var(--blood)"/>
+          <rect x="323" y="103" width="22" height="44" rx="3" fill="url(#cop)"/>
+          <rect x="349" y="103" width="22" height="44" rx="3" fill="url(#cop)" opacity="0.82"/>
+          <rect x="375" y="103" width="22" height="44" rx="3" style="fill:var(--blood-tint)"/>
+          <path d="M362 100 l-16 27 h12 l-6 23 l20 -30 h-12 z" stroke-width="1.4" style="fill:var(--plasma);stroke:var(--surface)"/>
+          <text x="360" y="182" text-anchor="middle" font-size="17" style="fill:var(--ink);font-family:var(--serif)">ATP energy</text>
+          <text x="360" y="202" text-anchor="middle" font-size="11" letter-spacing="1" style="fill:var(--muted);font-family:var(--mono)">the cell's fast battery</text>
+        </g>
+        <!-- muscle node (left) -->
+        <g>
+          <line x1="196" y1="125" x2="300" y2="125" style="stroke:var(--line)" stroke-width="2" stroke-dasharray="2 6"/>
+          <circle cx="140" cy="125" r="46" style="fill:var(--surface-2);stroke:var(--line)" stroke-width="1.6"/>
+          <rect x="112" y="119" width="56" height="12" rx="6" style="fill:var(--blood)"/>
+          <rect x="104" y="108" width="15" height="34" rx="5" style="fill:var(--blood-deep)"/>
+          <rect x="161" y="108" width="15" height="34" rx="5" style="fill:var(--blood-deep)"/>
+          <text x="140" y="192" text-anchor="middle" font-size="12" letter-spacing="1.5" style="fill:var(--ink-soft);font-family:var(--mono)">MUSCLE</text>
+        </g>
+        <!-- brain node (right) -->
+        <g>
+          <line x1="420" y1="125" x2="524" y2="125" style="stroke:var(--line)" stroke-width="2" stroke-dasharray="2 6"/>
+          <circle cx="580" cy="125" r="46" style="fill:var(--surface-2);stroke:var(--line)" stroke-width="1.6"/>
+          <path d="M560 108 q-14 2 -14 15 q0 13 14 16 q2 9 14 9 q7 0 11 -5 q12 1 12 -12 q7 -5 3 -14 q3 -11 -9 -14 q-6 -8 -16 -5 q-8 -3 -15 4 z" fill="none" stroke-width="2.4" style="stroke:var(--blood)"/>
+          <path d="M572 104 v46 M566 118 q10 3 12 -3 M566 136 q10 -3 14 3" fill="none" stroke-width="1.6" opacity="0.75" style="stroke:var(--blood)"/>
+          <text x="580" y="192" text-anchor="middle" font-size="12" letter-spacing="1.5" style="fill:var(--ink-soft);font-family:var(--mono)">BRAIN</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="n">3&ndash;5<small>g/day</small></span><div class="lbl">The plain-monohydrate dose that does the job, no loading week and no fancy new form required</div></div>
+      <div class="stat"><span class="n">0.88</span><div class="lbl">The memory effect size in adults aged 66 to 76 in a meta-analysis, versus near zero in the young</div></div>
+      <div class="stat"><span class="n">30<small>g/day, 5yr</small></span><div class="lbl">Shown safe and well-tolerated in healthy people in the sports-nutrition consensus review</div></div>
+    </div>
+    <p class="src">Memory effect: Prokopidis 2023 (meta-analysis of RCTs). Dose and safety: ISSN position stand, Kreider 2017. Full sources at the end, PubMed-verified.</p>
+  </div>
+</header>
+
+<!-- OPENER -->
+<section class="band">
+  <div class="wrap">
+    <p class="lede">For thirty years, creatine was the gym's worst-kept secret: cheap, boring, and one of the few supplements that genuinely worked for strength. Then something changed. The exact same white powder is now sold as a nootropic, an anti-aging tool, a women's-health staple, and a mood support, and sales have gone vertical.</p>
+    <p>Here is the honest frame for all of it. Creatine is one of the most-researched supplements in existence, and most of that research is about muscle. The newer brain, aging, and mood claims are not made up, but they sit at very different levels of proof. This report lines those levels up in plain sight, so you can see exactly where the evidence is solid, where it is promising, and where the trend has simply run ahead of the science.</p>
+    <div class="note">
+      <p class="h">Read this first</p>
+      <p>This is education, not medical advice, and not a recommendation to take or avoid anything. Creatine is sold as a dietary supplement. Doses mentioned are the ones studied, not a prescription. Effects vary from person to person, and some newer uses are early-stage. If you have kidney disease, are pregnant, or take medications, talk to a provider before starting. For research and educational purposes, adults 21 and over.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY TRENDING -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">Why it is everywhere right now</p>
+    <h2>The powder left the weight room</h2>
+    <p>Three currents pushed creatine out of the gym and into everyone's feed. First, researchers started publishing on the <strong>brain</strong>, not just the biceps, and the headline that a single dose sharpened thinking during sleep deprivation traveled fast. Second, a wave of work made the case that <strong>women</strong> may be some of the biggest under-users, since they store far less of it naturally. Third, the <strong>longevity</strong> world adopted it as a rare supplement that is cheap, safe, and actually backed by decades of data.</p>
+    <p>The result is a real surge. One retail tracker clocked creatine up almost seventy-two percent in a single year. That is a lot of new people taking it for reasons the old gym crowd never did, which is exactly why it is worth sorting the proven from the hoped.</p>
+  </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">What it actually is</p>
+    <h2>A rechargeable battery for your fastest cells</h2>
+    <p><strong>Creatine</strong> is a compound your body already makes and stores, mostly in muscle, with a smaller but important pool in the brain. Its job is energy timing. Your cells run on a fuel called ATP, but they only keep a few seconds of it on hand. Creatine, stored as <strong>phosphocreatine</strong>, is the instant recharge pack: it hands a phosphate back to spent fuel to remake ATP the moment demand spikes, during a heavy lift, a sprint, or a burst of hard thinking.</p>
+    <p>You get some from red meat and fish and make the rest yourself, but your stores are usually not full. Supplementing simply tops them off. That is the whole mechanism, and it is why the same molecule can matter to both a muscle mid-set and a brain mid-problem: they draw on the same fast-energy system. The catch is that topping off the tank clearly helps some tasks a lot, others a little, and others not at all.</p>
+  </div>
+</section>
+
+<!-- GOAL SELECTOR (interactive) -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">The whole debate in one tool</p>
+    <h2>Does it actually work for you?</h2>
+    <p>Creatine is not one claim, it is a dozen, and they are not equally proven. Tap the reason you would take it and see where the human evidence honestly stands.</p>
+
+    <div class="checker">
+      <p class="ctitle">Evidence by goal</p>
+      <p class="csub">Verdicts reflect human trial evidence as of mid-2026, not mechanism or animal data alone.</p>
+      <div class="claims" id="claims">
+        <button data-i="0" aria-pressed="true">Strength &amp; muscle</button>
+        <button data-i="1">Thinking under sleep loss</button>
+        <button data-i="2">Memory as I age</button>
+        <button data-i="3">Women, through menopause</button>
+        <button data-i="4">Mood &amp; depression</button>
+        <button data-i="5">I am vegetarian or vegan</button>
+        <button data-i="6">Everyone, for everything</button>
+      </div>
+      <div class="verdict v-proven" id="verdict">
+        <p class="vb"><span class="dotv"></span><span id="vBand"></span></p>
+        <p id="vText"></p>
+      </div>
+    </div>
+    <p class="small">Notice the shape of it: the gym uses are settled, the brain and women's uses are real but younger science, and "it fixes everything" is where the trend loses the plot.</p>
+  </div>
+</section>
+
+<!-- EVIDENCE LADDER -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">The evidence, sorted honestly</p>
+    <h2>What is settled, what is growing, what is oversold</h2>
+    <p>The single most reliable finding is the oldest one: for muscle, the memory benefit concentrates in the people who need it most. In a meta-analysis of controlled trials, creatine improved memory overall, but the effect was carried almost entirely by older adults.</p>
+    <div class="chart" data-animate>
+      <p class="ctitle">Memory benefit by age group</p>
+      <p class="csub">Standardized effect size (higher means a bigger benefit) from a meta-analysis of randomized trials. The gain is real, and it is concentrated in older brains (Prokopidis 2023).</p>
+      <div class="bars">
+        <div class="bar-row"><div class="bar-lbl">Adults 66 to 76</div><div class="bar-track"><div class="bar-fill bp" data-w="100">0.88</div></div></div>
+        <div class="bar-row"><div class="bar-lbl">All adults, pooled</div><div class="bar-track"><div class="bar-fill bp" data-w="33">0.29</div></div></div>
+        <div class="bar-row"><div class="bar-lbl">Younger, 11 to 31</div><div class="bar-track"><div class="bar-fill bp" data-w="6">0.03</div></div></div>
+      </div>
+      <p class="src">Prokopidis 2023, Nutr Rev. Ten RCTs; overall memory improved (effect 0.29, p=0.02), with a large effect in older adults and essentially none in the young.</p>
+    </div>
+    <div class="grade"><div class="g g-proven">Solid</div><div class="gc"><h4>Strength, power, and lean mass</h4><p>The core use, backed by hundreds of controlled trials over decades. Paired with resistance training, creatine reliably adds strength, power, and muscle beyond training alone. About as proven as a supplement gets.</p></div></div>
+    <div class="grade"><div class="g g-proven">Growing</div><div class="gc"><h4>Memory in older adults</h4><p>A meta-analysis of randomized trials found a genuine memory benefit, concentrated in adults roughly 66 and up, with little effect in younger people. Modest and age-dependent, but real human evidence.</p></div></div>
+    <div class="grade"><div class="g g-mixed">Early but real</div><div class="gc"><h4>Thinking during sleep loss or high stress</h4><p>A single high dose improved cognition and processing speed during 21 hours of sleep deprivation in a controlled study, alongside measurable brain-energy changes. A promising signal for demanding, low-sleep stretches, but it is one small study.</p></div></div>
+    <div class="grade"><div class="g g-mixed">Emerging</div><div class="gc"><h4>Women's health across the lifespan</h4><p>Women store far less creatine than men, and reviews suggest benefits for strength, for bone when combined with resistance training, and early signals for mood and cognition through menopause. A reasonable case, still under-studied.</p></div></div>
+    <div class="grade"><div class="g g-mixed">Adjunct only</div><div class="gc"><h4>Depression, as an add-on</h4><p>In a controlled trial, adding creatine to a standard antidepressant helped women respond faster than the drug alone. That is a helper finding under medical care, not evidence that creatine treats depression by itself.</p></div></div>
+    <div class="grade"><div class="g g-unproven">Oversold</div><div class="gc"><h4>"Reverses aging, fixes everything, needs fancy new forms"</h4><p>The sweeping promises outrun the data. Creatine does not reverse aging, is not a cure-all, and the exotic newer forms do not beat plain monohydrate. Match each claim to its own evidence, not to the hype.</p></div></div>
+    <div class="note">
+      <p class="h">The honest one-liner</p>
+      <p>Creatine is one of the safest, best-proven supplements there is for strength, and a genuinely promising one for the aging brain and for women. It is not magic, not new, and not a substitute for training and sleep. Take the proven part seriously and keep the rest in proportion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY / MYTHS -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">Cutting through the noise</p>
+    <h2>What people still get wrong</h2>
+    <ul>
+      <li><strong>"It wrecks your kidneys."</strong> This is the stubborn myth. In healthy people, long-term use at normal doses has repeatedly shown no kidney harm in the research, and the sports-nutrition consensus rates it safe at up to very high doses for years. It can nudge a lab marker called creatinine upward for harmless reasons, which sometimes gets misread. If you already have kidney disease, that is a real conversation for your provider, not a blanket rule for everyone.</li>
+      <li><strong>"It is just water weight."</strong> Yes, it pulls a little water into muscle, especially early. But the strength and lean-mass gains with training are real and measured, not a mirage on the scale.</li>
+      <li><strong>"You have to load with a big first week."</strong> Optional. A loading phase fills your stores a few days faster, but a steady 3 to 5 grams a day gets you to the same place with less stomach upset. Consistency beats ritual.</li>
+      <li><strong>"The new advanced forms are better."</strong> They are mostly better at being expensive. Plain creatine monohydrate is the most-studied, most-proven, and cheapest form, and nothing has clearly beaten it.</li>
+      <li><strong>"It is a guy's bodybuilding thing."</strong> Some of the most interesting newer evidence is in women and older adults, precisely because they start with lower stores. This one aged badly.</li>
+    </ul>
+    <div class="note good">
+      <p class="h">The simple version of using it</p>
+      <p>If you and your provider decide it fits: plain creatine monohydrate, 3 to 5 grams a day, taken whenever is easy and consistent. Timing barely matters. It works best stacked on top of the real foundation, resistance training, protein, and sleep, not in place of it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOTH SIDES -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Both sides, fairly</p>
+    <h2>The safest bet on the shelf, or a trend outrunning its data</h2>
+    <p>Both things are true at once, depending on which claim you are looking at. Here is the strongest fair version of each read, and the part each side tends to skip.</p>
+    <div class="lever">
+      <div class="top"><h3>The case it deserves the hype</h3><span class="tag pro">Proven and safe</span></div>
+      <p class="mech">Decades of trials, a clean safety record, pennies a day, and now real signals beyond muscle.</p>
+      <div class="pc">
+        <div class="col pro"><div class="lab">Strong points</div><ul>
+          <li>Among the most-studied supplements in existence, with a deep muscle evidence base</li>
+          <li>Safety is well characterized, even at high doses over years in healthy people</li>
+          <li>Genuine human signals now in aging memory, sleep-deprived cognition, and women's health</li>
+          <li>Cheap, simple, and the proven form is the plain one</li>
+        </ul></div>
+        <div class="col con"><div class="lab">What this side skips</div><ul>
+          <li>Most of the deep evidence is about muscle, not the brain</li>
+          <li>The exciting brain findings are still small or single studies</li>
+          <li>"Safe and proven for X" quietly gets stretched to "proven for everything"</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="lever">
+      <div class="top"><h3>The case the brain hype is early</h3><span class="tag con">Younger science</span></div>
+      <p class="mech">The newest, most-shared claims rest on the thinnest evidence, and get sold as settled.</p>
+      <div class="pc">
+        <div class="col pro"><div class="lab">Strong points</div><ul>
+          <li>The viral cognition result is one small sleep-deprivation study, not daily life</li>
+          <li>The mood finding is an add-on to medication, not a standalone treatment</li>
+          <li>Some brain and women's claims are extrapolated from mechanism, not proven outcomes</li>
+          <li>Individual response varies, and not everyone notices anything</li>
+        </ul></div>
+        <div class="col con"><div class="lab">What this side skips</div><ul>
+          <li>The muscle and strength case really is settled and strong</li>
+          <li>"Early" is not "false", the aging-memory meta-analysis is real</li>
+          <li>The safety and low cost make a measured trial low-risk for many</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DECISION -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">Turn it into a clear decision</p>
+    <h2>If you are considering it</h2>
+    <p>Not a push to take it. A way to decide with clear eyes.</p>
+    <div class="checks">
+      <div class="row"><span class="box"></span><p>Match your reason to the evidence. Strength and training support is the sure thing. Aging memory and women's health are promising. "Fix everything" is not a real reason.</p></div>
+      <div class="row"><span class="box"></span><p>Keep it plain. Monohydrate, 3 to 5 grams a day. Skip the loading ritual and the premium forms unless you have a specific reason.</p></div>
+      <div class="row"><span class="box"></span><p>Build the foundation first. Creatine amplifies training, protein, and sleep. It does not replace any of them.</p></div>
+      <div class="row"><span class="box"></span><p>Give it time and stay consistent. Stores fill over days to weeks, and daily use matters more than timing.</p></div>
+      <div class="row"><span class="box"></span><p>Loop in your provider if you have kidney disease, are pregnant, or take medications, since those are the real exceptions to the safety picture.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE TAKE -->
+<section class="band band--ink">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--plasma)">The BlessUp take</p>
+    <h2 style="color:#fff">An old workhorse with a genuinely new chapter</h2>
+    <p>Creatine is the rare supplement that earns most of its reputation. For strength and training, it is not hype, it is one of the best-supported tools we have, and its safety in healthy people is unusually well studied. That alone puts it in a different league from most of what trends.</p>
+    <p>The new chapter is real too, just younger. The aging-brain memory evidence is legitimate and worth watching, the women's-health case is sensible and overdue, and the sleep-deprivation cognition finding is a genuine spark. What none of that supports is the flattened version going around, that creatine is a universal brain-and-longevity upgrade everyone must take for everything. Hold both truths: take the proven part seriously, treat the promising part as promising, and let the exotic forms and cure-all promises pass you by. Plain powder, a sensible dose, real training, and honest expectations. That is the whole game, and it is a good one.</p>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="band">
+  <div class="wrap footer">
+    <p class="small" style="max-width:62ch;margin:0 auto 18px">Education only, not medical advice, and not a recommendation to take or avoid anything. Creatine is sold as a supplement. Doses are studied examples, not prescriptions. Some newer uses are early-stage, and individual response varies. If you have kidney disease, are pregnant, or take medications, talk to a provider first. For research and educational purposes, adults 21 and over.</p>
+    <p class="sig">Take the proven part seriously. Keep the rest in proportion.</p>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="band band--tint">
+  <div class="wrap sources">
+    <p class="eyebrow">The evidence</p>
+    <h2 style="font-size:26px">Sources</h2>
+    <p class="small">Human trials, meta-analyses, and consensus reviews, PubMed-verified. Where a finding is small, single-study, or an add-on rather than a standalone effect, it is flagged as such in the text above.</p>
+    <ol>
+      <li>Kreider RB, Kalman DS, Antonio J, et al. International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine. <em>J Int Soc Sports Nutr.</em> 2017;14:18. The consensus on efficacy for strength and power and on safety (up to 30 g/day studied, ~3 g/day habitual benefit). Via PubMed, PMID 28615996. <a href="https://doi.org/10.1186/s12970-017-0173-z" target="_blank" rel="noopener">doi:10.1186/s12970-017-0173-z</a></li>
+      <li>Prokopidis K, Giannos P, Triantafyllidis KK, et al. Effects of creatine supplementation on memory in healthy individuals: a systematic review and meta-analysis of randomized controlled trials. <em>Nutr Rev.</em> 2023;81(4):416-427. Overall memory benefit (effect 0.29, p=0.02), large in older adults, negligible in the young. Via PubMed, PMID 35984306. <a href="https://doi.org/10.1093/nutrit/nuac064" target="_blank" rel="noopener">doi:10.1093/nutrit/nuac064</a></li>
+      <li>Gordji-Nejad A, Matusch A, Kleedorfer S, et al. Single dose creatine improves cognitive performance and induces changes in cerebral high energy phosphates during sleep deprivation. <em>Sci Rep.</em> 2024;14:4937. A single high dose improved cognition and processing speed during 21 h of sleep deprivation. Via PubMed, PMID 38418482. <a href="https://doi.org/10.1038/s41598-024-54249-9" target="_blank" rel="noopener">doi:10.1038/s41598-024-54249-9</a></li>
+      <li>Smith-Ryan AE, Cabre HE, Eckerson JM, Candow DG. Creatine Supplementation in Women's Health: A Lifespan Perspective. <em>Nutrients.</em> 2021;13(3):877. Females store roughly 70 to 80% less creatine than males; strength, bone, mood, and cognition considerations across the lifespan. Via PubMed, PMID 33800439. <a href="https://doi.org/10.3390/nu13030877" target="_blank" rel="noopener">doi:10.3390/nu13030877</a></li>
+      <li>Lyoo IK, Yoon S, Kim TS, et al. A randomized, double-blind placebo-controlled trial of oral creatine monohydrate augmentation for enhanced response to a selective serotonin reuptake inhibitor in women with major depressive disorder. <em>Am J Psychiatry.</em> 2012;169(9):937-945. Creatine added to an SSRI improved depression scores faster than the drug alone in 52 women (add-on, not standalone). Via PubMed, PMID 22864465. <a href="https://doi.org/10.1176/appi.ajp.2012.12010009" target="_blank" rel="noopener">doi:10.1176/appi.ajp.2012.12010009</a></li>
+    </ol>
+    <p class="small">Also referenced, not treated as trial evidence: 2025 retail sales-trend reporting on creatine's category growth (directional, market data). This report takes no position beyond what the cited evidence supports and does not recommend use. According to PubMed, and with attribution to the authors above via their DOIs.</p>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var prog=document.getElementById('prog');
+  function onScroll(){var h=document.documentElement;var s=(h.scrollTop||document.body.scrollTop);var ht=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(s/ht*100)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tb=document.getElementById('themebtn');
+  if(tb){tb.addEventListener('click',function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var isDark=cur? cur==='dark':dark;
+    document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+  });}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+    e.target.querySelectorAll('.bar-fill').forEach(function(f){if(reduce)f.style.transition='none';f.style.width=f.getAttribute('data-w')+'%';});
+    io.unobserve(e.target);}});},{threshold:0.25});
+  document.querySelectorAll('[data-animate]').forEach(function(el){
+    if(reduce)el.querySelectorAll('.bar-fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});else io.observe(el);});
+
+  // goal selector
+  var GOALS=[
+    {v:"proven",b:"Solid, the core use",t:"The most-proven use, full stop. Hundreds of controlled trials show creatine plus training adds strength, power, and lean mass beyond training alone. If you lift, this is about as evidence-backed as a supplement gets."},
+    {v:"mixed",b:"Early but real",t:"A genuine signal. A single high dose improved thinking and processing speed during 21 hours of sleep deprivation in a controlled study. Promising for demanding, low-sleep stretches, but it is one small study, not a daily-life guarantee."},
+    {v:"proven",b:"Growing and age-dependent",t:"The most interesting new area. A meta-analysis of controlled trials found creatine improved memory, and the benefit was concentrated in adults 66 to 76, with little in younger people. Real, modest, and it favors older brains."},
+    {v:"mixed",b:"Emerging, and overdue",t:"A reasonable case. Women store 70 to 80 percent less creatine than men, and reviews point to benefits for strength, for bone when paired with resistance training, plus early mood and cognition signals through menopause. Understudied, but promising."},
+    {v:"mixed",b:"Adjunct only, not a fix",t:"Only as a helper. In one controlled trial, adding creatine to a standard antidepressant helped women improve faster than the drug alone. That is an add-on finding under medical care, not evidence that creatine treats depression by itself."},
+    {v:"mixed",b:"You may respond most",t:"Meatless diets mean lower baseline stores, so supplementing tends to produce larger jumps in muscle and brain creatine. Some of the clearest cognitive effects in the research have shown up in vegetarians. A sensible fit."},
+    {v:"unproven",b:"Oversold",t:"This is where the trend outruns the data. Creatine is safe and genuinely useful for specific things, but it is not a cure-all, it does not reverse aging, and exotic new forms do not beat plain monohydrate. Match the claim to the evidence."}
+  ];
+  var claimsWrap=document.getElementById('claims'), verdict=document.getElementById('verdict'), vBand=document.getElementById('vBand'), vText=document.getElementById('vText');
+  function show(i){
+    var c=GOALS[i];
+    verdict.className='verdict v-'+c.v;
+    vBand.textContent=c.b; vText.textContent=c.t;
+    claimsWrap.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed', b.getAttribute('data-i')==(''+i)?'true':'false');});
+  }
+  claimsWrap.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){show(parseInt(b.getAttribute('data-i'),10));});});
+  show(0);
+})();
+</script>
