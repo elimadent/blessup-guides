@@ -1,0 +1,501 @@
+<title>The Gray Zone: Peptides, the FDA, and a 100-Year-Old Playbook - BlessUp</title>
+<!--
+  BlessUp interactive report - "The Gray Zone" (peptide regulation: 503A, the July 2026 PCAC review,
+  and the Flexner-era history). Thick Blood layout re-skinned to an archival / documentary look.
+  ASCII + HTML entities only. Education only. No vendor names. No use-claims. Two-sided + honest. No em dashes.
+-->
+<style>
+  :root{
+    /* ARCHIVAL DOSSIER (default light): warm document paper, ink, an oxblood "official seal" accent,
+       an archival slate-blue secondary. Two-sided semantics: green = the reform/upside case, amber = caution. */
+    --paper:#F3EFE6; --surface:#FBF8F1; --surface-2:#ECE6D8;
+    --ink:#1C1A15; --ink-soft:#413B31; --muted:#6E6656;
+    --line:#D7D0C0; --line-soft:#E6E0D1;
+    --blood:#8A2E2A; --blood-deep:#5E1C1A; --blood-tint:#EBDCD7;      /* oxblood seal / primary */
+    --plasma:#34506B; --plasma-soft:#B9C6D4; --plasma-tint:#DEE5EC;   /* archival slate-blue */
+    --good:#3B6B4A; --good-tint:#DCE8DF;
+    --amber:#8C6320; --amber-tint:#F0E5CC;
+    --serif:"Charter","Cambria","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:"Seravek","Segoe UI","Avenir Next","Helvetica Neue",system-ui,sans-serif;
+    --mono:ui-monospace,"Cascadia Code","SF Mono",Consolas,"Liberation Mono",monospace;
+    --wrap:740px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#141310; --surface:#1B1A15; --surface-2:#22201A;
+      --ink:#EDE7D9; --ink-soft:#C5BEAD; --muted:#8B8371;
+      --line:#312E24; --line-soft:#26241C;
+      --blood:#CF7062; --blood-deep:#E79688; --blood-tint:#2C1A16;
+      --plasma:#84A5C4; --plasma-soft:#3A4E62; --plasma-tint:#161F28;
+      --good:#67AC80; --good-tint:#15271C;
+      --amber:#CB9A4C; --amber-tint:#2A2110;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#141310; --surface:#1B1A15; --surface-2:#22201A;
+    --ink:#EDE7D9; --ink-soft:#C5BEAD; --muted:#8B8371;
+    --line:#312E24; --line-soft:#26241C;
+    --blood:#CF7062; --blood-deep:#E79688; --blood-tint:#2C1A16;
+    --plasma:#84A5C4; --plasma-soft:#3A4E62; --plasma-tint:#161F28;
+    --good:#67AC80; --good-tint:#15271C;
+    --amber:#CB9A4C; --amber-tint:#2A2110;
+  }
+  :root[data-theme="light"]{
+    --paper:#F3EFE6; --surface:#FBF8F1; --surface-2:#ECE6D8;
+    --ink:#1C1A15; --ink-soft:#413B31; --muted:#6E6656;
+    --line:#D7D0C0; --line-soft:#E6E0D1;
+    --blood:#8A2E2A; --blood-deep:#5E1C1A; --blood-tint:#EBDCD7;
+    --plasma:#34506B; --plasma-soft:#B9C6D4; --plasma-tint:#DEE5EC;
+    --good:#3B6B4A; --good-tint:#DCE8DF;
+    --amber:#8C6320; --amber-tint:#F0E5CC;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;background:var(--paper)}
+  body{margin:0;background:var(--paper)}
+  .page{position:relative;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:18px;line-height:1.64;-webkit-font-smoothing:antialiased}
+  .page *{box-sizing:border-box}
+  ::selection{background:var(--blood-tint);color:var(--blood-deep)}
+
+  .prog{position:fixed;top:0;left:0;height:3px;width:0%;z-index:50;
+    background:linear-gradient(90deg,var(--blood-deep),var(--blood));transition:width .1s linear}
+
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .band{padding:66px 0}
+  .band--tint{background:var(--surface-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+  .band--ink{background:#141310;color:#EDE7D9;border-top:1px solid #34301F;border-bottom:1px solid #34301F}
+
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;text-wrap:balance;line-height:1.14;letter-spacing:-.005em}
+  h2{font-size:clamp(27px,4.4vw,38px);margin:0 0 .5em;font-weight:600}
+  h3{font-size:clamp(21px,3vw,26px);margin:2.1em 0 .5em;line-height:1.2}
+  h4{font-size:19px;margin:1.6em 0 .3em;font-family:var(--sans);font-weight:700;letter-spacing:0}
+  p{margin:0 0 1.05em;max-width:66ch}
+  a{color:var(--blood);text-underline-offset:2px;text-decoration-thickness:1px}
+  a:hover{color:var(--blood-deep)}
+  strong{font-weight:700;color:var(--ink)}
+  em{font-style:italic}
+  .band--ink strong{color:#fff}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--blood);margin:0 0 14px;font-weight:600;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+  .lede{font-size:clamp(19px,2.5vw,22px);line-height:1.55;color:var(--ink-soft)}
+  .small{font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .src{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--muted);margin-top:10px}
+  ul,ol{margin:0 0 1.1em;padding-left:1.25em;max-width:66ch}
+  li{margin:.34em 0}
+  li::marker{color:var(--blood)}
+  hr{border:0;border-top:1px solid var(--line);margin:2.4em 0}
+
+  .hero{padding:60px 0 52px;border-bottom:1px solid var(--line)}
+  .stamp{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;
+    text-transform:uppercase;font-weight:700;color:var(--blood);border:1.5px solid var(--blood);border-radius:5px;
+    padding:6px 12px;transform:rotate(-1.5deg);margin:0 0 22px;background:var(--blood-tint)}
+  .stamp .dot{width:7px;height:7px;border-radius:50%;background:var(--blood);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+  .hero-grid{display:grid;grid-template-columns:1fr 168px;gap:36px;align-items:center}
+  .hero h1{font-size:clamp(40px,7.6vw,70px);margin:.06em 0 .3em;letter-spacing:-.02em;line-height:1.02}
+  .hero .thesis{font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.6vw,23px);color:var(--blood-deep);max-width:40ch;margin:.4em 0 0}
+  @media(max-width:640px){.hero-grid{grid-template-columns:1fr;gap:20px}.scales{justify-self:start}}
+  .scales{display:block;width:160px;height:auto}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:40px 0 0;border-top:1px solid var(--line);padding-top:26px}
+  .stat{padding:0 22px}.stat:first-child{padding-left:0}
+  .stat+ .stat{border-left:1px solid var(--line)}
+  .stat .n{font-family:var(--serif);font-size:clamp(30px,5vw,44px);font-weight:600;color:var(--blood);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  .stat .n small{font-size:.42em;color:var(--ink-soft);font-weight:400}
+  .stat .lbl{font-size:12.5px;color:var(--muted);margin-top:11px;line-height:1.45}
+  @media(max-width:560px){.stats{grid-template-columns:1fr}.stat{padding:15px 0}.stat:first-child{padding-top:0}.stat+ .stat{border-left:0;border-top:1px solid var(--line)}}
+
+  .note{border-left:3px solid var(--plasma);background:var(--plasma-tint);padding:16px 20px;border-radius:0 6px 6px 0;margin:1.6em 0}
+  .note.blood{border-left-color:var(--blood);background:var(--blood-tint)}
+  .note.good{border-left-color:var(--good);background:var(--good-tint)}
+  .note.amber{border-left-color:var(--amber);background:var(--amber-tint)}
+  .note p{margin:0;max-width:none}
+  .note .h{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 6px;color:var(--ink-soft)}
+
+  .chart{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:24px 24px 20px;margin:1.8em 0}
+  .chart .ctitle{font-family:var(--sans);font-weight:700;font-size:17px;margin:0 0 4px}
+  .chart .csub{font-size:13.5px;color:var(--muted);margin:0 0 18px}
+  .bars{display:flex;flex-direction:column;gap:14px}
+  .bar-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center}
+  .bar-lbl{font-size:14px;text-align:right;color:var(--ink-soft);line-height:1.25}
+  .bar-track{position:relative;background:var(--surface-2);border-radius:4px;height:30px;overflow:hidden}
+  .bar-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:4px;transition:width 1.1s cubic-bezier(.3,0,.2,1);
+    display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:var(--mono);font-size:12.5px;color:#fff;font-weight:600}
+  .bar-fill.b-blood{background:linear-gradient(90deg,var(--blood-deep),var(--blood))}
+  .bar-fill.b-plasma{background:linear-gradient(90deg,#28405a,var(--plasma))}
+  @media(max-width:560px){.bar-row{grid-template-columns:1fr;gap:4px}.bar-lbl{text-align:left}}
+
+  /* ---- interactive timeline ---- */
+  .tl{margin:2em 0 1em}
+  .tl-track{display:flex;gap:0;position:relative;border-top:2px solid var(--line);padding-top:0}
+  .tl-node{flex:1;position:relative;padding-top:26px;text-align:center;cursor:pointer;background:none;border:0;font-family:inherit;color:inherit}
+  .tl-node::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;
+    background:var(--surface);border:2.5px solid var(--muted);transition:.2s}
+  .tl-node:hover::before{border-color:var(--blood)}
+  .tl-node[aria-pressed="true"]::before{background:var(--blood);border-color:var(--blood);box-shadow:0 0 0 4px var(--blood-tint)}
+  .tl-node .yr{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--ink-soft)}
+  .tl-node[aria-pressed="true"] .yr{color:var(--blood)}
+  .tl-node .tag{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.2;display:block}
+  @media(max-width:640px){.tl-track{flex-direction:column;border-top:0;border-left:2px solid var(--line);gap:2px}
+    .tl-node{text-align:left;padding:10px 0 10px 22px}.tl-node::before{top:14px;left:-9px;transform:none}}
+  .tl-detail{background:var(--surface);border:1px solid var(--line);border-top:2px solid var(--blood);border-radius:0 0 8px 8px;padding:20px 22px;margin-top:18px}
+  .tl-detail h4{margin:0 0 6px;font-family:var(--serif);font-size:20px;font-weight:600}
+  .tl-detail .yd{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blood);font-weight:700}
+  .tl-detail p{margin:.5em 0 0;font-size:15.5px;max-width:none}
+
+  .flow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1.6em 0}
+  .flow .step{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:16px 18px}
+  .flow .step .n{font-family:var(--mono);font-size:11.5px;color:var(--blood);font-weight:700;letter-spacing:.08em}
+  .flow .step h4{margin:.4em 0 .3em;font-size:16px}
+  .flow .step p{font-size:14px;margin:0;color:var(--ink-soft)}
+  @media(max-width:640px){.flow{grid-template-columns:1fr}}
+
+  .lever{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin:16px 0}
+  .lever .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:2px}
+  .lever h3{margin:0;font-size:21px}
+  .lever .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:4px 9px;border-radius:4px;white-space:nowrap}
+  .tag.reg{background:var(--blood-tint);color:var(--blood-deep)}
+  .tag.acc{background:var(--good-tint);color:var(--good)}
+  .lever .mech{font-size:14.5px;color:var(--muted);margin:.3em 0 1em}
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line-soft)}
+  .pc .col{padding:14px 16px 6px}
+  .pc .col.pro{border-right:1px solid var(--line-soft)}
+  .pc .col .lab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+  .pc .pro .lab{color:var(--good)}
+  .pc .con .lab{color:var(--blood)}
+  .pc ul{font-size:14px;padding-left:1.1em;margin:0 0 8px;max-width:none}
+  .pc li{margin:.3em 0;color:var(--ink-soft)}
+  @media(max-width:600px){.pc{grid-template-columns:1fr}.pc .col.pro{border-right:none;border-bottom:1px solid var(--line-soft)}}
+
+  .checks{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 22px;margin:1.2em 0}
+  .checks .row{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line-soft);align-items:flex-start}
+  .checks .row:last-child{border-bottom:0}
+  .checks .box{flex:0 0 18px;width:18px;height:18px;border:2px solid var(--blood);border-radius:3px;margin-top:3px}
+  .checks .row p{margin:0;font-size:15.5px}
+
+  .flags{background:#241512;border:1px solid rgba(207,112,98,.3);border-radius:10px;padding:24px 26px;color:#EEDCD5}
+  .flags h3{color:#F5E3DC;margin:0 0 10px}
+  .flags ul{columns:2;column-gap:30px;max-width:none;padding-left:1.15em}
+  .flags li{color:#E4CFC7;margin:.4em 0;break-inside:avoid}
+  .flags li::marker{color:#CF7062}
+  .flags .fast{margin-top:14px;font-size:14.5px;color:#DCC6BE}
+  @media(max-width:560px){.flags ul{columns:1}}
+
+  .sources{font-size:13.5px;line-height:1.5}
+  .sources ol{max-width:none;padding-left:1.6em}
+  .sources li{margin:.55em 0;color:var(--ink-soft)}
+  .sources a{word-break:break-word}
+
+  .footer{padding:40px 0 60px;text-align:center}
+  .footer .sig{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--blood-deep)}
+  .themebtn{position:fixed;right:14px;bottom:14px;z-index:60;font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+    background:var(--surface);color:var(--ink-soft);border:1px solid var(--line);border-radius:5px;padding:8px 13px;cursor:pointer;box-shadow:0 3px 12px rgba(20,20,15,.14)}
+
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
+</style>
+
+<div class="page">
+<div class="prog" id="prog"></div>
+<button class="themebtn" id="themebtn" type="button" aria-label="Toggle light or dark">Theme</button>
+
+<!-- =============== HERO =============== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="stamp"><span class="dot"></span>Under review &middot; FDA hearing July 23-24, 2026</div>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">The Peptide Library &middot; Policy &amp; Access</p>
+        <h1>The Gray Zone</h1>
+        <p class="lede" style="max-width:42ch;margin:.1em 0 .5em">Why the peptides you have heard about are stuck between a century-old playbook and a vote happening next week.</p>
+        <p class="thesis">The safety questions are real. The economics that keep those questions unanswered are also real. Both things can be true at once.</p>
+      </div>
+      <!-- SUBJECT-GROUNDED hero: a balance scale, science on one pan, access on the other -->
+      <svg class="scales" viewBox="0 0 160 180" role="img" aria-label="A balance scale weighing safety evidence against access">
+        <g fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round">
+          <line x1="80" y1="18" x2="80" y2="132"/>
+          <line x1="30" y1="40" x2="130" y2="40"/>
+          <path d="M30,40 L14,74 M30,40 L46,74"/>
+          <path d="M130,40 L114,74 M130,40 L146,74"/>
+          <path d="M60,132 L100,132 M52,148 L108,148"/>
+        </g>
+        <circle cx="80" cy="18" r="4.5" fill="var(--blood)"/>
+        <path d="M12,74 a18,10 0 0 0 36,0 Z" fill="var(--blood)" opacity="0.85"/>
+        <path d="M112,74 a18,10 0 0 0 36,0 Z" fill="var(--plasma)" opacity="0.85"/>
+        <g font-family="ui-monospace,monospace" font-size="8.5" font-weight="700" text-anchor="middle">
+          <text x="30" y="70" fill="#fff">DATA</text>
+          <text x="130" y="70" fill="#fff">ACCESS</text>
+        </g>
+      </svg>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="n">7</span><div class="lbl">Peptides going before the FDA advisory committee on July 23-24, 2026</div></div>
+      <div class="stat"><span class="n">160&rarr;85</span><div class="lbl">US medical schools before and after the 1910 report that reshaped medicine</div></div>
+      <div class="stat"><span class="n">0<small> of 7</small></span><div class="lbl">Of those peptides are FDA-approved for any use, which is the core of the problem</div></div>
+    </div>
+    <p class="src">FDA Pharmacy Compounding Advisory Committee agenda, July 23-24, 2026. Flexner-era figures: 1904 vs 1920 counts of MD-granting schools. Full sources at the end.</p>
+  </div>
+</header>
+
+<!-- =============== OPENER =============== -->
+<section class="band">
+  <div class="wrap">
+    <p class="lede">If you follow peptides at all, you have probably felt the ground shifting. One month a compound is easy to find, the next it is "restricted," then a headline says the FDA is about to decide its fate. It can feel arbitrary and a little ominous.</p>
+    <p>It is not arbitrary. There is a specific legal process underway, with a specific date, and underneath it is a pattern that is more than a hundred years old. This report walks through three things, in plain language and without taking a side for you: what is actually happening right now with these seven peptides, the honest history of how American medicine came to work this way, and the economics that quietly decide which compounds ever get studied. You will leave understanding the landscape well enough to make calm, informed decisions with your own provider, instead of reacting to headlines.</p>
+    <div class="note">
+      <p class="h">Read this first</p>
+      <p>This is general education about regulation and history. It is not medical advice, not legal advice, and not a recommendation to buy, sell, use, or avoid anything. It names no vendors and endorses no products. Regulatory facts here are accurate as of mid-July 2026 and will keep moving, so verify the current status before acting, and route any personal decision through a qualified provider. For research and educational purposes, adults 21 and over.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== WHAT IS HAPPENING NOW =============== -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">What is happening right now</p>
+    <h2>Seven peptides, one hearing, next week</h2>
+    <p>On <strong>July 23 and 24, 2026</strong>, an FDA advisory group called the Pharmacy Compounding Advisory Committee is meeting to decide whether seven peptides should be allowed to be made by compounding pharmacies. On the 23rd the committee takes up <strong>BPC-157, KPV, TB-500, and MOTS-c</strong>. On the 24th it takes up <strong>Emideltide, Epitalon, and Semax</strong>. Each is being considered in both its base and salt forms.</p>
+    <p>Ahead of the meeting, the FDA published its own recommendation: it is <strong>proposing that none of the seven be added</strong> to the approved list of substances pharmacies can compound from. Its stated reasons are consistent across all seven. The agency says the compounds are not well enough characterized, that there is little or no human evidence they work for the mostly injectable uses people want them for, and that there is not enough human safety data, including an unassessed risk that the body could mount an immune reaction to them.</p>
+    <div class="note blood">
+      <p class="h">The nuance that matters</p>
+      <p>This is a proposal and an advisory vote, not a final ban. The FDA has said it will not issue a final decision until it hears the committee out and finishes its reviews. So on July 25 nothing is automatically "illegal." What changes is the direction of travel, and the direction is toward tighter restriction. Also worth knowing plainly: none of these seven is FDA-approved for any medical use, which is the fact the whole fight turns on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== 503A EXPLAINER =============== -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">The rules of the road</p>
+    <h2>What "the list" actually means</h2>
+    <p>Almost all of this comes down to one word: <strong>compounding</strong>, which is a pharmacy making a medication to order rather than selling a mass-produced, pre-approved drug. Compounding is legal and useful, but it is fenced in by two sections of federal law, and a substance that is not already an approved drug can only be compounded if it earns a place on an official list.</p>
+    <div class="flow">
+      <div class="step"><div class="n">SECTION 503A</div><h4>The corner compounding pharmacy</h4><p>Makes one prescription at a time for one patient. To use a raw substance that is not an approved drug, that substance must sit on the 503A "bulks list." Most peptide access rides on this.</p></div>
+      <div class="step"><div class="n">SECTION 503B</div><h4>The larger outsourcing facility</h4><p>Makes batches for clinics. It has its own, stricter list. This is the lane the FDA is separately closing for compounded semaglutide and tirzepatide.</p></div>
+      <div class="step"><div class="n">CATEGORY 1</div><h4>Allowed while reviewed</h4><p>A nominated substance the FDA has no immediate major concern about. Pharmacies may keep compounding it while the evaluation continues.</p></div>
+      <div class="step"><div class="n">CATEGORY 2</div><h4>The freeze</h4><p>A substance the FDA has flagged for a significant safety concern. In practice this shuts down compounding. In 2023 the agency moved a dozen-plus peptides here.</p></div>
+    </div>
+    <p>Here is the twist that created today's confusion. In April 2026 the FDA <em>removed</em> a batch of peptides, including BPC-157, out of the Category 2 freeze. That sounds like good news, but the agency did not move them into the "allowed" Category 1 either. It moved them into no category at all. That in-between status, neither blessed nor banned, is the gray zone this report is named for, and next week's hearing is the FDA trying to resolve it, most likely by declining to add them.</p>
+  </div>
+</section>
+
+<!-- =============== TIMELINE (interactive) =============== -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">How we got here</p>
+    <h2>A hundred-year arc, in five moments</h2>
+    <p>Tap any point to see what happened. The through-line is simple: the standard that decides what counts as "real medicine" was set a century ago, and it favors things that can be studied in large, expensive trials.</p>
+
+    <div class="tl">
+      <div class="tl-track" id="tlTrack" role="tablist" aria-label="Regulatory timeline">
+        <button class="tl-node" data-i="0" role="tab" aria-pressed="true"><span class="yr">1904</span><span class="tag">160 schools</span></button>
+        <button class="tl-node" data-i="1" role="tab" aria-pressed="false"><span class="yr">1910</span><span class="tag">The report</span></button>
+        <button class="tl-node" data-i="2" role="tab" aria-pressed="false"><span class="yr">1920s</span><span class="tag">Consolidation</span></button>
+        <button class="tl-node" data-i="3" role="tab" aria-pressed="false"><span class="yr">2023</span><span class="tag">The freeze</span></button>
+        <button class="tl-node" data-i="4" role="tab" aria-pressed="false"><span class="yr">2026</span><span class="tag">The vote</span></button>
+      </div>
+      <div class="tl-detail" id="tlDetail" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== THE HISTORY, HONESTLY =============== -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">The history, told straight</p>
+    <h2>The 1910 report that built modern medicine, and what it cost</h2>
+    <p>In 1910, a researcher named Abraham Flexner, funded by the Carnegie Foundation, published a survey of every medical school in the United States and Canada. His verdict was blunt: most were for-profit "diploma mills" with no laboratories, no hospital training, and no real science. He recommended closing most of them and tying the survivors to universities built around the German model of laboratory medicine.</p>
+    <p>It worked, and fast. In 1904 there were about <strong>160 medical schools teaching 28,000 students</strong>. By 1920 there were <strong>85 schools teaching under 14,000</strong>. Between 1910 and 1935, more than half of American medical schools merged or closed. The philanthropies of the era, led by the Rockefeller and Carnegie foundations, poured roughly <strong>150 to 180 million dollars</strong> into medicine over the next two decades, and they steered that money almost entirely toward the schools that adopted the lab-based, drug-centered model.</p>
+
+    <h3>The honest ledger</h3>
+    <p>This is where most retellings pick a side. We will not. The Flexner reforms were genuinely two things at once.</p>
+    <div class="note good">
+      <p class="h">What it genuinely fixed</p>
+      <p>Before 1910, you could buy a medical degree from a school with no lab and no patients. The reforms shut those down, required real science and hospital training, and produced the rigorous, evidence-based medicine that gives us modern surgery, vaccines, and safety standards. Much of what makes medicine trustworthy today traces to this cleanup. That is not a small thing, and it is not a conspiracy.</p>
+    </div>
+    <div class="note amber">
+      <p class="h">What it also erased</p>
+      <p>The same reforms wiped out entire traditions that did not fit the new mold. The botanical (eclectic) schools were gone by 1939. Homeopathic schools fell from 22 in 1900 to two by 1923. And the human cost fell hardest on Black medicine: of the country's Black medical schools, only <strong>Howard and Meharry</strong> survived, a blow whose effect on the number of Black physicians is still measurable a century later. A single standard, backed by a single stream of money, decided which kinds of medicine got to exist.</p>
+    </div>
+    <p>You do not have to believe in a coordinated plot to see the pattern, and the honest version is actually stronger than the conspiracy version. A real, well-intentioned quality standard, married to concentrated funding, quietly narrowed the field to what that standard could measure. That is the machine. It is still running.</p>
+  </div>
+</section>
+
+<!-- =============== THE ECONOMICS =============== -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">The part nobody puts on a poster</p>
+    <h2>Why the trials that would settle it never get funded</h2>
+    <p>The FDA's objection to these seven peptides is not a lie. There really is little large-scale human trial data on them. The honest question is <em>why</em> that data does not exist, and the answer is mostly economic, not scientific.</p>
+    <p>A modern approval-grade human trial program routinely costs on the order of <strong>hundreds of millions of dollars</strong>. A company only spends that if it can own the result, through a patent that gives it years of exclusive sales to earn the money back. But you generally cannot get a strong composition patent on a molecule that occurs in the body or in nature, and several of these peptides are exactly that. No exclusivity means no way to recoup the cost, which means no company volunteers to run the trials.</p>
+    <div class="note blood">
+      <p class="h">The catch-22, stated plainly</p>
+      <p>Regulators ask for large human trials before they will bless a compound. Those trials only get funded when someone can patent the compound. The compounds that cannot be patented therefore never get the trials, and the missing trials then become the official reason to restrict them. The bar is real. It is also a bar the market is structurally unable to clear for this whole category. That is the quiet engine under the headlines.</p>
+    </div>
+    <p>Notice what this does and does not prove. It does <em>not</em> prove these peptides are safe or that they work, and anyone who tells you the gray zone is proof of a cover-up is overselling it. What it shows is narrower and more useful: for an unpatentable molecule, "we lack the trials" can be an economic outcome as much as a scientific verdict. Keep both of those in view and you will read every peptide headline more clearly than most people do.</p>
+  </div>
+</section>
+
+<!-- =============== THE TWO ARGUMENTS, WEIGHED =============== -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Both sides, on their merits</p>
+    <h2>The two honest arguments, weighed</h2>
+    <p>This is not a good-guys-versus-bad-guys story. It is a genuine collision between two things people are right to care about. Here is the strongest fair version of each, with the weaknesses each side tends to skip.</p>
+
+    <div class="lever">
+      <div class="top"><h3>The safety-and-standards case</h3><span class="tag reg">The FDA's side</span></div>
+      <p class="mech">Do not let unproven injectables spread through pharmacies faster than we can vouch for them.</p>
+      <div class="pc">
+        <div class="col pro"><div class="lab">Where it is strong</div><ul>
+          <li>Immunogenicity is a real, specific risk for peptides, and it has not been formally assessed for these</li>
+          <li>Injectable routes carry higher stakes than a capsule if something is wrong</li>
+          <li>The gray market's purity and dosing are genuinely inconsistent, which is a safety problem on its own</li>
+          <li>"We have not proven it is safe" is a legitimate reason for caution</li>
+        </ul></div>
+        <div class="col con"><div class="lab">Where it is weak</div><ul>
+          <li>"No trials" partly reflects who can fund trials, not just the science</li>
+          <li>A blanket freeze can push people toward the least-regulated sources, the opposite of safety</li>
+          <li>It offers no path for a promising, unpatentable compound to ever clear the bar</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="lever">
+      <div class="top"><h3>The access-and-autonomy case</h3><span class="tag acc">The other side</span></div>
+      <p class="mech">Let informed adults and their providers make supervised decisions instead of waiting for trials that will never be funded.</p>
+      <div class="pc">
+        <div class="col pro"><div class="lab">Where it is strong</div><ul>
+          <li>The trial bar is structurally unclearable for unpatentable molecules, so "wait for trials" can mean "never"</li>
+          <li>Supervised compounding with real testing is safer than a total ban that drives people underground</li>
+          <li>Adults with a provider make risk-benefit calls in medicine all the time</li>
+        </ul></div>
+        <div class="col con"><div class="lab">Where it is weak</div><ul>
+          <li>"Hard to study" is not the same as "safe," and enthusiasm is not evidence</li>
+          <li>Real harm can hide in a compound for years before anyone connects the dots</li>
+          <li>Marketing routinely oversells these, which makes truly informed consent harder</li>
+        </ul></div>
+      </div>
+    </div>
+    <p>An honest reader can hold both. The safety concern is legitimate and the access concern is legitimate, and the reason it feels unfair is that the current system offers no bridge between them for a molecule no one can patent.</p>
+  </div>
+</section>
+
+<!-- =============== WHAT THIS MEANS FOR YOU =============== -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">Turn it into calm action</p>
+    <h2>What this actually means for you</h2>
+    <p>No panic, no stockpiling, no outrage required. Being informed is the whole win here.</p>
+    <div class="checks">
+      <div class="row"><span class="box"></span><p>Understand that as of now this is a proposal and a vote, not an overnight ban. Watch what the committee actually decides on July 23-24 rather than the pre-meeting headline.</p></div>
+      <div class="row"><span class="box"></span><p>Keep every decision with a qualified provider who knows your history. The regulatory status is one input; your health is the decision.</p></div>
+      <div class="row"><span class="box"></span><p>Take the purity point seriously. Whatever your view of the rules, inconsistent gray-market quality is a real risk that a total ban would make worse, not better, by pushing sourcing further into the dark.</p></div>
+      <div class="row"><span class="box"></span><p>Read peptide marketing with the economics in mind. "No trials" can mean unfunded rather than disproven, but it can also mean genuinely unknown. Both are reasons for humility, not hype.</p></div>
+      <div class="row"><span class="box"></span><p>Follow the story at the source. The FDA posts its advisory-committee materials publicly, so you can read the actual reasoning instead of a summary of a summary.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== RED FLAGS =============== -->
+<section class="band">
+  <div class="wrap">
+    <div class="flags">
+      <h3>Where people get this wrong</h3>
+      <p style="color:#E4CFC7;margin:0 0 12px;max-width:none">The two failure modes are opposite, and both cost you clarity. Watch for these in yourself and in what you read.</p>
+      <ul>
+        <li>Treating the gray zone as proof the peptides work. It is not.</li>
+        <li>Treating the freeze as proof they are dangerous. It is not that either.</li>
+        <li>Panic-buying or stockpiling ahead of a vote that has not happened</li>
+        <li>Trusting a marketer's "clinically studied" without checking what was actually studied, in whom, and for what</li>
+        <li>Assuming a rule change equals a settled scientific verdict</li>
+        <li>Reacting to a headline about the proposal as if it were the final decision</li>
+      </ul>
+      <p class="fast">The goal is not to be for or against the FDA. It is to see the machine clearly enough that no headline can push you around.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== THE BLESSUP TAKE =============== -->
+<section class="band band--ink">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--plasma)">The BlessUp take</p>
+    <h2 style="color:#fff">Steady beats loud</h2>
+    <p>It would be easy to turn this into an outrage post. The pieces are all there: a powerful family, a hundred-year-old report, a federal agency, and a vote that could restrict things people rely on. But outrage is a poor teacher, and half of the popular version is overstated anyway.</p>
+    <p>Here is the steadier truth. The reforms of a century ago genuinely made medicine safer, and they genuinely erased traditions and communities that did not fit a single mold. Today's peptide restrictions rest on genuine safety gaps, and those gaps persist partly because no one can profit from filling them. Two true things, sitting uncomfortably together. Our job is not to tell you which side to pick. It is to make sure you can see the whole board, hold both truths at once, and make your own calls with a clear head and a real provider. Know the history, respect the safety questions, watch the economics, and do not let anyone, in either direction, do your thinking for you.</p>
+  </div>
+</section>
+
+<!-- =============== CLOSER =============== -->
+<section class="band">
+  <div class="wrap footer">
+    <p class="small" style="max-width:62ch;margin:0 auto 18px">Education only. Not medical or legal advice, and not a recommendation to buy, use, or avoid anything. Regulatory facts are accurate as of mid-July 2026 and will change, so verify current status and route personal decisions through a qualified provider. No vendors named or endorsed. For research and educational purposes, adults 21 and over.</p>
+    <p class="sig">See the whole board, then decide.</p>
+  </div>
+</section>
+
+<!-- =============== SOURCES =============== -->
+<section class="band band--tint">
+  <div class="wrap sources">
+    <p class="eyebrow">The record</p>
+    <h2 style="font-size:26px">Sources</h2>
+    <p class="small">Regulatory facts trace to FDA materials and legal and industry summaries; historical figures to the standard record on the Flexner Report. Dates and statuses are as of mid-July 2026.</p>
+    <ol>
+      <li>US FDA. Meeting of the Pharmacy Compounding Advisory Committee, July 23-24, 2026 (agenda: BPC-157, KPV, TB-500, MOTS-c, Emideltide, Epitalon, Semax). <a href="https://www.fda.gov/advisory-committees/advisory-committee-calendar/july-23-24-2026-meeting-pharmacy-compounding-advisory-committee-07232026" target="_blank" rel="noopener">fda.gov advisory committee calendar</a></li>
+      <li>US FDA. Bulk Drug Substances Used in Compounding Under Section 503A of the FD&amp;C Act (the 503A bulks list and its categories). <a href="https://www.fda.gov/drugs/human-drug-compounding/bulk-drug-substances-used-compounding-under-section-503a-fdc-act" target="_blank" rel="noopener">fda.gov 503A bulk substances</a></li>
+      <li>Drug Topics. FDA Panel to Evaluate 7 Popular Peptides for Compounding Substances List (2026). <a href="https://www.drugtopics.com/view/fda-panel-to-evaluate-7-popular-peptides-for-compounding-substances-list" target="_blank" rel="noopener">drugtopics.com</a></li>
+      <li>Hyman, Phelps &amp; McNamara, FDA Law Blog. FDA's Peptide Rally: What Compounders and Industry Need to Know (April 2026). <a href="https://www.thefdalawblog.com/2026/04/fdas-peptide-rally-what-compounders-and-industry-need-to-know-post-1-of-2/" target="_blank" rel="noopener">thefdalawblog.com</a></li>
+      <li>Flexner Report (1910), Carnegie Foundation; standard summary of school counts, consolidation, and the homeopathic, eclectic, and Black medical school closures. <a href="https://en.wikipedia.org/wiki/Flexner_Report" target="_blank" rel="noopener">en.wikipedia.org/wiki/Flexner_Report</a></li>
+      <li>STAT News. How one 1910 report curtailed Black medical education for over a century (2022). <a href="https://www.statnews.com/2022/04/04/color-code-flexner-report-curtailed-black-medical-education/" target="_blank" rel="noopener">statnews.com</a></li>
+    </ol>
+    <p class="small">Figures such as the 150 to 180 million dollars in early-century philanthropic funding and the 1904 vs 1920 school and student counts are drawn from that standard historical record and are stated as ranges where sources vary. This report takes no position for or against any regulatory outcome.</p>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var prog=document.getElementById('prog');
+  function onScroll(){var h=document.documentElement;var s=(h.scrollTop||document.body.scrollTop);var ht=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(s/ht*100)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var tb=document.getElementById('themebtn');
+  if(tb){tb.addEventListener('click',function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var isDark=cur? cur==='dark':dark;
+    document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+  });}
+
+  // animate bars on scroll
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+    e.target.querySelectorAll('.bar-fill').forEach(function(f){if(reduce)f.style.transition='none';f.style.width=f.getAttribute('data-w')+'%';});
+    io.unobserve(e.target);}});},{threshold:0.25});
+  document.querySelectorAll('[data-animate]').forEach(function(el){
+    if(reduce)el.querySelectorAll('.bar-fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});else io.observe(el);});
+
+  // interactive timeline
+  var TL=[
+    {y:"1904",h:"A crowded, uneven field",b:"About 160 medical schools were teaching roughly 28,000 students across the US and Canada. Quality ranged from serious university programs to for-profit schools with no laboratory and no hospital patients. There was no single standard for what counted as real medical training."},
+    {y:"1910",h:"The Flexner Report lands",b:"Abraham Flexner, funded by the Carnegie Foundation, published a school-by-school survey and recommended closing most schools and tying the rest to universities built on laboratory science. It set the standard, still with us, for what counts as legitimate medicine: things you can test in controlled, well-funded studies."},
+    {y:"1920s",h:"Consolidation and its casualties",b:"By 1920 the country was down to 85 schools and under 14,000 students, and more than half of all schools closed or merged by 1935. Rockefeller and Carnegie money, 150 to 180 million dollars, steered almost entirely to the new model. Botanical and homeopathic schools collapsed, and of the Black medical schools only Howard and Meharry survived."},
+    {y:"2023",h:"The peptide freeze",b:"The same underlying logic reached peptides. The FDA moved more than a dozen peptides, including BPC-157, into Category 2 of the compounding list, citing insufficient data and safety concerns. In practice that halted their compounding and sent the market scrambling."},
+    {y:"2026",h:"The gray zone, and the vote",b:"In April 2026 the FDA pulled a batch of peptides back out of Category 2 but did not approve them either, leaving them in limbo. On July 23-24, 2026 its advisory committee reviews seven of them, with the FDA already recommending that none be added to the approved list. Not a final ban, but a clear direction."}
+  ];
+  var track=document.getElementById('tlTrack'), detail=document.getElementById('tlDetail');
+  function render(i){
+    var m=TL[i];
+    detail.innerHTML='<div class="yd">'+m.y+'</div><h4>'+m.h+'</h4><p>'+m.b+'</p>';
+    track.querySelectorAll('.tl-node').forEach(function(n){n.setAttribute('aria-pressed', n.getAttribute('data-i')==(''+i)?'true':'false');});
+  }
+  if(track){
+    track.querySelectorAll('.tl-node').forEach(function(n){
+      n.addEventListener('click',function(){render(parseInt(n.getAttribute('data-i'),10));
+        if(!reduce)detail.scrollIntoView({behavior:'smooth',block:'nearest'});});
+    });
+    render(0);
+  }
+})();
+</script>
