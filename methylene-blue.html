@@ -1,0 +1,476 @@
+<title>Methylene Blue: The Bluest Trend in Biohacking, Weighed Honestly - BlessUp</title>
+<!--
+  BlessUp interactive report - "Methylene Blue" (hype vs evidence). Thick Blood layout re-skinned
+  to a methylene-blue clinical palette. Interactive hormetic dose-curve. ASCII + HTML entities only.
+  Education only. No vendor names. No use-claims. Two-sided + honest. No em dashes. Built on the
+  vault Methylene Blue guide's PMID-verified citations (verified 2026-07-11).
+-->
+<style>
+  :root{
+    /* METHYLENE-BLUE CLINICAL (light default): cool paper, ink, the compound's own deep blue as primary,
+       a cyan secondary, GREEN=benefit zone, AMBER=ceiling, RED=the two hard safety rules. */
+    --paper:#F1F4F9; --surface:#FBFCFE; --surface-2:#E6ECF4;
+    --ink:#152030; --ink-soft:#37465C; --muted:#63708A;
+    --line:#D2DAE6; --line-soft:#E3E9F1;
+    --blood:#1E52B8; --blood-deep:#143E8E; --blood-tint:#DCE6F8;   /* methylene blue = primary */
+    --plasma:#1B7A93; --plasma-soft:#BcdCE4; --plasma-tint:#D7ECF1; /* cyan-teal secondary */
+    --good:#2E7D57; --good-tint:#DBEAE1;
+    --amber:#9A6A1C; --amber-tint:#F2E6CB;
+    --danger:#B23129; --danger-deep:#8A241D; --danger-tint:#F3DAD6;
+    --serif:"Charter","Cambria","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:"Seravek","Segoe UI","Avenir Next","Helvetica Neue",system-ui,sans-serif;
+    --mono:ui-monospace,"Cascadia Code","SF Mono",Consolas,"Liberation Mono",monospace;
+    --wrap:740px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0C1017; --surface:#121826; --surface-2:#182234;
+      --ink:#E7ECF5; --ink-soft:#B6C0D2; --muted:#7E8BA3;
+      --line:#26324A; --line-soft:#1B2436;
+      --blood:#5A8CE8; --blood-deep:#8FB2F2; --blood-tint:#12203A;
+      --plasma:#4FB4CE; --plasma-soft:#22414C; --plasma-tint:#0F2730;
+      --good:#5CA980; --good-tint:#13271D;
+      --amber:#D2A24A; --amber-tint:#2A2110;
+      --danger:#E0685E; --danger-deep:#EF8C82; --danger-tint:#2E1513;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0C1017; --surface:#121826; --surface-2:#182234;
+    --ink:#E7ECF5; --ink-soft:#B6C0D2; --muted:#7E8BA3;
+    --line:#26324A; --line-soft:#1B2436;
+    --blood:#5A8CE8; --blood-deep:#8FB2F2; --blood-tint:#12203A;
+    --plasma:#4FB4CE; --plasma-soft:#22414C; --plasma-tint:#0F2730;
+    --good:#5CA980; --good-tint:#13271D;
+    --amber:#D2A24A; --amber-tint:#2A2110;
+    --danger:#E0685E; --danger-deep:#EF8C82; --danger-tint:#2E1513;
+  }
+  :root[data-theme="light"]{
+    --paper:#F1F4F9; --surface:#FBFCFE; --surface-2:#E6ECF4;
+    --ink:#152030; --ink-soft:#37465C; --muted:#63708A;
+    --line:#D2DAE6; --line-soft:#E3E9F1;
+    --blood:#1E52B8; --blood-deep:#143E8E; --blood-tint:#DCE6F8;
+    --plasma:#1B7A93; --plasma-soft:#BCDCE4; --plasma-tint:#D7ECF1;
+    --good:#2E7D57; --good-tint:#DBEAE1;
+    --amber:#9A6A1C; --amber-tint:#F2E6CB;
+    --danger:#B23129; --danger-deep:#8A241D; --danger-tint:#F3DAD6;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;background:var(--paper)}
+  body{margin:0;background:var(--paper)}
+  .page{position:relative;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.64;-webkit-font-smoothing:antialiased}
+  .page *{box-sizing:border-box}
+  ::selection{background:var(--blood-tint);color:var(--blood-deep)}
+  .prog{position:fixed;top:0;left:0;height:3px;width:0%;z-index:50;background:linear-gradient(90deg,var(--blood-deep),var(--blood));transition:width .1s linear}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .band{padding:66px 0}
+  .band--tint{background:var(--surface-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+  .band--ink{background:#0A0E16;color:#E7ECF5;border-top:1px solid #23324c;border-bottom:1px solid #23324c}
+
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;text-wrap:balance;line-height:1.14;letter-spacing:-.005em}
+  h2{font-size:clamp(27px,4.4vw,38px);margin:0 0 .5em}
+  h3{font-size:clamp(21px,3vw,26px);margin:2.1em 0 .5em;line-height:1.2}
+  h4{font-size:19px;margin:1.6em 0 .3em;font-family:var(--sans);font-weight:700;letter-spacing:0}
+  p{margin:0 0 1.05em;max-width:66ch}
+  a{color:var(--blood);text-underline-offset:2px;text-decoration-thickness:1px}
+  a:hover{color:var(--blood-deep)}
+  strong{font-weight:700;color:var(--ink)}
+  em{font-style:italic}
+  .band--ink strong{color:#fff}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--blood);margin:0 0 14px;font-weight:600;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+  .lede{font-size:clamp(19px,2.5vw,22px);line-height:1.55;color:var(--ink-soft)}
+  .small{font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .src{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--muted);margin-top:10px}
+  ul,ol{margin:0 0 1.1em;padding-left:1.25em;max-width:66ch}
+  li{margin:.34em 0}
+  li::marker{color:var(--blood)}
+
+  .hero{padding:60px 0 52px;border-bottom:1px solid var(--line)}
+  .hero-grid{display:grid;grid-template-columns:1fr 150px;gap:36px;align-items:center}
+  .hero h1{font-size:clamp(42px,8vw,76px);margin:.04em 0 .3em;letter-spacing:-.02em;line-height:1.0;color:var(--blood-deep)}
+  .hero .thesis{font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.6vw,23px);color:var(--blood-deep);max-width:40ch;margin:.4em 0 0}
+  @media(max-width:640px){.hero-grid{grid-template-columns:1fr;gap:18px}.vial{justify-self:start}}
+  .vial{display:block;width:132px;height:auto}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:40px 0 0;border-top:1px solid var(--line);padding-top:26px}
+  .stat{padding:0 22px}.stat:first-child{padding-left:0}
+  .stat+ .stat{border-left:1px solid var(--line)}
+  .stat .n{font-family:var(--serif);font-size:clamp(30px,5vw,44px);font-weight:600;color:var(--blood);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  .stat .n small{font-size:.42em;color:var(--ink-soft);font-weight:400}
+  .stat .lbl{font-size:12.5px;color:var(--muted);margin-top:11px;line-height:1.45}
+  @media(max-width:560px){.stats{grid-template-columns:1fr}.stat{padding:15px 0}.stat:first-child{padding-top:0}.stat+ .stat{border-left:0;border-top:1px solid var(--line)}}
+
+  .note{border-left:3px solid var(--plasma);background:var(--plasma-tint);padding:16px 20px;border-radius:0 6px 6px 0;margin:1.6em 0}
+  .note.blood{border-left-color:var(--blood);background:var(--blood-tint)}
+  .note.good{border-left-color:var(--good);background:var(--good-tint)}
+  .note.amber{border-left-color:var(--amber);background:var(--amber-tint)}
+  .note.danger{border-left-color:var(--danger);background:var(--danger-tint)}
+  .note p{margin:0;max-width:none}
+  .note .h{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 6px;color:var(--ink-soft)}
+
+  .flow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1.6em 0}
+  .flow.three{grid-template-columns:1fr 1fr 1fr}
+  .flow .step{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:16px 18px}
+  .flow .step .n{font-family:var(--mono);font-size:11.5px;color:var(--blood);font-weight:700;letter-spacing:.08em}
+  .flow .step h4{margin:.4em 0 .3em;font-size:16px}
+  .flow .step p{font-size:14px;margin:0;color:var(--ink-soft)}
+  @media(max-width:640px){.flow,.flow.three{grid-template-columns:1fr}}
+
+  /* evidence ladder */
+  .grade{display:grid;grid-template-columns:130px 1fr;gap:0;border:1px solid var(--line);border-radius:7px;overflow:hidden;margin:10px 0;background:var(--surface)}
+  .grade .g{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-align:center;padding:14px 10px;color:#fff;line-height:1.25}
+  .g-solid{background:var(--good)}.g-early{background:var(--blood)}.g-animal{background:var(--amber)}.g-hype{background:var(--danger)}
+  .grade .gc{padding:14px 18px}.grade .gc h4{margin:0 0 3px;font-size:16px}.grade .gc p{margin:0;font-size:14px;color:var(--ink-soft);max-width:none}
+  @media(max-width:520px){.grade{grid-template-columns:1fr}.grade .g{padding:8px}}
+
+  /* interactive dose curve */
+  .dose{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:24px;margin:1.8em 0;box-shadow:0 8px 30px rgba(15,25,45,.06)}
+  .dose .ctitle{font-family:var(--sans);font-weight:700;font-size:18px;margin:0 0 3px}
+  .dose .csub{font-size:13.5px;color:var(--muted);margin:0 0 16px}
+  .dose svg{width:100%;height:auto;display:block}
+  .dslider{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--muted) 0 12%,var(--good) 12% 45%,var(--amber) 45% 60%,var(--danger) 60% 100%);outline:none;margin:14px 0 4px}
+  .dslider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--blood);border:3px solid var(--surface);box-shadow:0 1px 4px rgba(15,25,45,.35);cursor:pointer}
+  .dslider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--blood);border:3px solid var(--surface);cursor:pointer}
+  .dslider:focus-visible::-webkit-slider-thumb{outline:2px solid var(--plasma);outline-offset:2px}
+  .dzone{margin-top:14px;border-radius:8px;padding:15px 18px;border:1px solid var(--line)}
+  .dzone .zb{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:0 0 5px}
+  .dzone p{margin:0;font-size:15px;max-width:none}
+  .dz-low{background:var(--surface-2)}.dz-low .zb{color:var(--muted)}
+  .dz-good{background:var(--good-tint);border-color:var(--good)}.dz-good .zb{color:var(--good)}
+  .dz-amber{background:var(--amber-tint);border-color:var(--amber)}.dz-amber .zb{color:var(--amber)}
+  .dz-danger{background:var(--danger-tint);border-color:var(--danger)}.dz-danger .zb{color:var(--danger)}
+
+  .lever{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin:16px 0}
+  .lever .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:2px}
+  .lever h3{margin:0;font-size:21px}
+  .lever .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:4px 9px;border-radius:4px;white-space:nowrap}
+  .tag.pro{background:var(--good-tint);color:var(--good)}.tag.con{background:var(--danger-tint);color:var(--danger-deep)}
+  .lever .mech{font-size:14.5px;color:var(--muted);margin:.3em 0 1em}
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line-soft)}
+  .pc .col{padding:14px 16px 6px}.pc .col.pro{border-right:1px solid var(--line-soft)}
+  .pc .col .lab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+  .pc .pro .lab{color:var(--good)}.pc .con .lab{color:var(--danger-deep)}
+  .pc ul{font-size:14px;padding-left:1.1em;margin:0 0 8px;max-width:none}.pc li{margin:.3em 0;color:var(--ink-soft)}
+  @media(max-width:600px){.pc{grid-template-columns:1fr}.pc .col.pro{border-right:none;border-bottom:1px solid var(--line-soft)}}
+
+  .checks{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 22px;margin:1.2em 0}
+  .checks .row{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line-soft);align-items:flex-start}
+  .checks .row:last-child{border-bottom:0}
+  .checks .box{flex:0 0 18px;width:18px;height:18px;border:2px solid var(--blood);border-radius:3px;margin-top:3px}
+  .checks .row p{margin:0;font-size:15.5px}
+
+  .flags{background:#2A1210;border:1px solid rgba(224,104,94,.32);border-radius:10px;padding:24px 26px;color:#F3DCD6}
+  .flags h3{color:#F8E5DF;margin:0 0 6px}
+  .flags .lead{color:#EAC9C2;margin:0 0 14px;max-width:none;font-size:15px}
+  .rule{display:flex;gap:14px;padding:14px 0;border-top:1px solid rgba(224,104,94,.22)}
+  .rule .num{flex:0 0 30px;font-family:var(--serif);font-size:26px;font-weight:700;color:#EF8C82;line-height:1}
+  .rule h4{margin:0 0 3px;color:#F8E5DF;font-size:16.5px}
+  .rule p{margin:0;color:#E4C6BF;font-size:14.5px;max-width:none}
+  .flags .fast{margin-top:14px;font-size:14.5px;color:#E9CDC6}
+
+  .sources{font-size:13.5px;line-height:1.5}
+  .sources ol{max-width:none;padding-left:1.6em}
+  .sources li{margin:.55em 0;color:var(--ink-soft)}.sources a{word-break:break-word}
+  .footer{padding:40px 0 60px;text-align:center}
+  .footer .sig{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--blood-deep)}
+  .themebtn{position:fixed;right:14px;bottom:14px;z-index:60;font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;background:var(--surface);color:var(--ink-soft);border:1px solid var(--line);border-radius:5px;padding:8px 13px;cursor:pointer;box-shadow:0 3px 12px rgba(15,25,45,.14)}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="page">
+<div class="prog" id="prog"></div>
+<button class="themebtn" id="themebtn" type="button" aria-label="Toggle light or dark">Theme</button>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">The Peptide Library &middot; Compounds in the Spotlight</p>
+        <h1>Methylene Blue</h1>
+        <p class="lede" style="max-width:42ch;margin:.1em 0 .5em">The bluest trend in biohacking, weighed honestly. A real mechanism, a real medicine, and two rules you cannot skip.</p>
+        <p class="thesis">An elegant molecule with a genuine job, wrapped in more hype than its human evidence has earned, and carrying two safety rules that are not optional.</p>
+      </div>
+      <svg class="vial" viewBox="0 0 120 170" role="img" aria-label="A vial of deep blue liquid with a single falling drop">
+        <path d="M40,8 h40 v14 l-6,8 v96 a26,26 0 0 1 -52,0 v-96 l-6,-8 v-14 z" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M28,66 v60 a26,26 0 0 0 52,0 v-60 a60,18 0 0 1 -52,0 z" fill="var(--blood)" opacity="0.88"/>
+        <ellipse cx="54" cy="66" rx="26" ry="8" fill="var(--blood-deep)" opacity="0.5"/>
+        <rect x="38" y="2" width="44" height="10" rx="3" fill="var(--ink-soft)"/>
+        <circle cx="54" cy="150" r="5" fill="var(--blood)"/>
+        <path d="M54,142 q4,6 0,10 q-4,-4 0,-10 z" fill="var(--blood)"/>
+      </svg>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="n">150+<small> yrs</small></span><div class="lbl">One of the oldest synthetic medicines still in use, first made as a textile dye in 1876</div></div>
+      <div class="stat"><span class="n">1</span><div class="lbl">The number of conditions it is actually FDA-approved to treat, a blood disorder called methemoglobinemia</div></div>
+      <div class="stat"><span class="n">26</span><div class="lbl">People in the main placebo-controlled human trial behind the brain-and-focus claims, which is tiny</div></div>
+    </div>
+    <p class="src">FDA-approved indication: methemoglobinemia. Headline cognitive trial: Rodriguez 2016, n=26. Citations at the end. Verified against PubMed.</p>
+  </div>
+</header>
+
+<!-- OPENER -->
+<section class="band">
+  <div class="wrap">
+    <p class="lede">Methylene blue is suddenly everywhere. A blue tongue in a wellness video, a few drops in a morning drink, a promise of clean energy and a sharper brain. The hype is loud, and underneath it there is a real molecule with a genuinely elegant job. There is also a version of this that lands people in the emergency room.</p>
+    <p>This report does the thing the trend videos skip. It separates what methylene blue actually is and does from what it is being sold as, weighs the honest evidence on both sides, and puts the two hard safety rules where you cannot miss them. By the end you will know exactly where the real signal stops and the marketing begins, and whether this belongs anywhere near you.</p>
+    <div class="note danger">
+      <p class="h">Read this first</p>
+      <p>This is education, not medical advice. Methylene blue is an approved medicine for one specific blood condition; the energy and focus use is off-label. Two things here are safety-critical and not optional. It is a potent MAO inhibitor, which is dangerous with antidepressants and other serotonin drugs, and it is dangerous in a common genetic condition called G6PD deficiency. It must also be pharmaceutical (USP) grade, never the aquarium or industrial dye. Every dose mentioned is a studied example, not a prescription. Talk to a licensed provider. For research and educational purposes, adults 21 and over.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY TRENDING -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">Why it is everywhere right now</p>
+    <h2>How a 19th-century dye became a 2026 obsession</h2>
+    <p>Methylene blue did not change. The internet did. It got swept up in the broader wellness and longevity wave, where "mitochondria" and "cellular energy" became household words and a visibly blue compound made for unforgettable video. A viral clip from a prominent public-health figure drew tens of millions of views, the "stack it with NAD" content took off, and a molecule that had quietly sat in hospitals for a century became a lifestyle accessory almost overnight.</p>
+    <p>Some of that attention is deserved, because the underlying mechanism is real. A lot of it is the usual pattern: a genuine kernel of science stretched into claims the human data do not support, sold with confidence and a photogenic blue tongue. Our job is to keep the kernel and drop the stretch.</p>
+  </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">What it actually is</p>
+    <h2>An electron shuttle, and an accidental one</h2>
+    <p>Strip away the branding and methylene blue does something simple and clever. Your mitochondria make energy by passing electrons down a chain, like a bucket brigade. When part of that chain is sluggish or blocked, the brigade backs up and energy production stalls. Methylene blue is small enough to slip in and carry electrons across the gap itself, an <strong>alternative electron carrier</strong> that keeps the line moving. At the same time it can mop up certain reactive byproducts, which is the antioxidant part of the story.</p>
+    <p>That is the whole elegant idea: one tiny molecule doing one simple thing, carrying electrons, and out of that comes the bioenergetic and clarity effect people chase. Historically it has worn many hats, from the first synthetic antimalarial to a surgical stain, which is why it is described as the compound that helped launch modern pharmacology.</p>
+    <div class="note blood">
+      <p class="h">The catch built into the molecule</p>
+      <p>Separately from the electron work, methylene blue is a <strong>potent inhibitor of MAO-A</strong>, an enzyme that breaks down serotonin. Nobody takes it for that, but it is the single most important fact about it, because it is the source of its most dangerous interaction. Hold onto this; it comes back in the safety section as a hard rule.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOSE CURVE (interactive) -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">The one rule, made visual</p>
+    <h2>Why more is not better, it is worse</h2>
+    <p>Methylene blue is the textbook example of a <strong>hormetic</strong> compound: helpful in a low window, and actively harmful above it. The same redox activity that shuttles electrons at a low dose flips to generating damage at a high dose. Drag the slider and watch where the benefit ends and the harm begins.</p>
+
+    <div class="dose">
+      <p class="ctitle">The hormetic curve</p>
+      <p class="csub">Illustrative shape based on the biphasic dose-response literature, not a dosing guide. The point is the shape, not the numbers.</p>
+      <svg id="curveSvg" viewBox="0 0 640 250" role="img" aria-label="A hormetic dose-response curve: benefit rises at low dose then falls into harm at high dose">
+        <line x1="40" y1="150" x2="612" y2="150" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="40" y="238" font-family="ui-monospace,monospace" font-size="11" fill="var(--muted)">low dose</text>
+        <text x="612" y="238" font-family="ui-monospace,monospace" font-size="11" fill="var(--muted)" text-anchor="end">high dose</text>
+        <text x="18" y="72" font-family="ui-monospace,monospace" font-size="11" fill="var(--good)" transform="rotate(-90 18 72)" text-anchor="middle">benefit</text>
+        <text x="18" y="210" font-family="ui-monospace,monospace" font-size="11" fill="var(--danger)" transform="rotate(-90 18 210)" text-anchor="middle">harm</text>
+        <path id="curvePath" d="" fill="none" stroke="var(--blood)" stroke-width="3" stroke-linecap="round"/>
+        <line id="marker" x1="0" y1="0" x2="0" y2="0" stroke="var(--ink)" stroke-width="1" stroke-dasharray="3 3"/>
+        <circle id="dot" cx="0" cy="0" r="7" fill="var(--blood)" stroke="var(--surface)" stroke-width="2.5"/>
+      </svg>
+      <input type="range" class="dslider" id="doseSlider" min="0" max="100" value="30" aria-label="dose">
+      <div class="dzone dz-good" id="doseZone">
+        <p class="zb" id="zoneBand">Benefit window</p>
+        <p id="zoneText"></p>
+      </div>
+    </div>
+    <p class="small">This is exactly why the number-one practical rule for methylene blue is a strict low-dose ceiling. The people who get hurt are almost always the ones who assumed a good thing scales up. It does not.</p>
+  </div>
+</section>
+
+<!-- EVIDENCE -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">The evidence, sorted honestly</p>
+    <h2>What is proven, what is promising, and what is just loud</h2>
+    <p>The gap between the mechanism and the human proof is the whole story here. The mechanism is one of the strongest in this library. The human cognitive evidence is real but early and small. Sorted by how much you should trust it:</p>
+    <div class="grade"><div class="g g-solid">Established</div><div class="gc"><h4>Real medicine, in a hospital</h4><p>Its one FDA-approved use is a blood disorder called methemoglobinemia, given intravenously by clinicians. Hospitals also reach for it off-label in specific emergencies, like a dangerous drop in blood pressure during surgery and a chemotherapy-related confusion. All rock solid, and all a world away from a capsule taken for focus.</p></div></div>
+    <div class="grade"><div class="g g-early">Early human</div><div class="gc"><h4>Brain activity and memory, in small trials</h4><p>A placebo-controlled trial in 26 healthy adults found low-dose methylene blue raised fMRI markers of brain activity and improved memory retrieval (Rodriguez 2016). Real, but a tiny study, and a brain scan changing is not the same as a life changing.</p></div></div>
+    <div class="grade"><div class="g g-early">Early human</div><div class="gc"><h4>A mood signal, in one small trial</h4><p>A double-blind crossover trial in 37 people with bipolar disorder found an active dose improved depression and anxiety scores versus a low-dose comparator, added on top of their usual medication (Alda 2016). A genuine human signal, but small, in a specific clinical group under medical supervision, not evidence for a healthy person chasing an edge.</p></div></div>
+    <div class="grade"><div class="g g-animal">Animal only</div><div class="gc"><h4>Neuroprotection and lifespan in models</h4><p>Consistent rodent work shows memory and neuroprotective effects tied to mitochondrial energy (Callaway 2004, Auchter 2014). It also extends lifespan in worms and flies, the same models that flagged rapamycin. Encouraging signals, not human proof.</p></div></div>
+    <div class="grade"><div class="g g-hype">Overreach</div><div class="gc"><h4>"Cures brain fog, reverses aging, fixes everything"</h4><p>The big claims outrun the data. The largest clinical program on a methylene-blue-derived drug for Alzheimer's (LMTM) failed its primary endpoints in Phase 3 (Gauthier 2016). Treat the sweeping promises as marketing.</p></div></div>
+    <div class="note">
+      <p class="h">The honest one-liner</p>
+      <p>Mechanistically strong, historically deep, and genuinely promising for a quiet cognitive lift, with human evidence that is still small and early. If you want a compound backed by large, replicated human trials for brain performance, this is not that yet. If you are comfortable with a sound mechanism and honest, limited data, it earns a look, within the rules below.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE TWO HARD RULES -->
+<section class="band">
+  <div class="wrap">
+    <div class="flags">
+      <h3>The two rules that are not optional</h3>
+      <p class="lead">Methylene blue is gentle when respected and genuinely dangerous when it is not. Almost every serious problem traces to one of these two, and both are preventable before you ever start.</p>
+      <div class="rule"><div class="num">1</div><div><h4>It is a potent MAO inhibitor, so it can cause serotonin syndrome</h4><p>Combined with anything that raises serotonin, SSRIs and SNRIs (most antidepressants), MAOIs, high-dose melatonin, psilocybin, St. John's wort, it can trigger serotonin syndrome, which is potentially life-threatening. If you take an antidepressant, methylene blue is off the table unless a physician is actively managing it. This is a contraindication, not a caution.</p></div></div>
+      <div class="rule"><div class="num">2</div><div><h4>It is dangerous in G6PD deficiency</h4><p>In people with this common inherited enzyme deficiency, methylene blue can trigger a dangerous breakdown of red blood cells. It is invisible until it happens, so screen for it first with a simple, cheap blood test before ever using it.</p></div></div>
+      <p class="fast">Plus one product rule: pharmaceutical (USP) grade only. Aquarium and industrial "methylene blue" contain contaminants and heavy metals and are not for humans.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOTH SIDES -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">Both sides, fairly</p>
+    <h2>The honest case for, and against</h2>
+    <p>This is not a scam and it is not a miracle. Here is the strongest fair version of each side, including the part each side likes to skip.</p>
+    <div class="lever">
+      <div class="top"><h3>The case for interest</h3><span class="tag pro">Worth a look</span></div>
+      <p class="mech">A rare combination of a clean mechanism, a long safety record in medicine, and a low cost.</p>
+      <div class="pc">
+        <div class="col pro"><div class="lab">Strong points</div><ul>
+          <li>The electron-carrier mechanism is real and elegant, not hand-waving</li>
+          <li>Decades of medical use mean the safety profile is well understood</li>
+          <li>The small human trial and consistent animal data point the same direction</li>
+          <li>Inexpensive, and the effect people report is a calm clarity, not a jittery stimulant</li>
+        </ul></div>
+        <div class="col con"><div class="lab">What this side skips</div><ul>
+          <li>The human cognitive evidence is genuinely small and early</li>
+          <li>The flagship derivative drug failed its big Alzheimer's trial</li>
+          <li>A good mechanism has fooled us before</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="lever">
+      <div class="top"><h3>The case for caution</h3><span class="tag con">Slow down</span></div>
+      <p class="mech">Loud claims, thin human proof, and two ways to get genuinely hurt.</p>
+      <div class="pc">
+        <div class="col pro"><div class="lab">Strong points</div><ul>
+          <li>The marketing has sprinted far ahead of the human data</li>
+          <li>The MAO and G6PD risks are real and land people in the ER</li>
+          <li>The hormetic ceiling means a common mistake, taking more, causes harm</li>
+          <li>Gray-market product quality and grade are inconsistent</li>
+        </ul></div>
+        <div class="col con"><div class="lab">What this side skips</div><ul>
+          <li>The mechanism and safety record are genuinely better than most trend supplements</li>
+          <li>Respected properly, the serious risks are almost entirely preventable</li>
+          <li>"Early evidence" is not the same as "no evidence"</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MYTHS -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Cutting through the noise</p>
+    <h2>What people get wrong</h2>
+    <ul>
+      <li><strong>"It is just a dye, so it is harmless."</strong> The dye part is harmless, that is the blue urine. The MAO inhibition and the G6PD risk are the dangerous parts, and they have nothing to do with color.</li>
+      <li><strong>"More will work better."</strong> The exact opposite. Above the low window the same chemistry flips from helping to harming. This is the single most common and most dangerous mistake.</li>
+      <li><strong>"It reverses aging."</strong> It extends lifespan in worms and flies. That is a reason to study it, not a result in humans. No human longevity trial supports the claim.</li>
+      <li><strong>"Any methylene blue will do."</strong> Aquarium and industrial grades are not purified for people. Pharmaceutical grade only, or not at all.</li>
+      <li><strong>"If I feel nothing, I should take more."</strong> Feeling nothing usually means your foundation, sleep, nutrition, movement, is doing the heavy lifting already, or the dose is fine and the effect is just subtle. It is not a signal to climb the dose.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- WHAT IT MEANS FOR YOU -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">Turn it into a clear decision</p>
+    <h2>If you are actually considering it</h2>
+    <p>Not a recommendation to use it. A checklist for deciding well, with a provider.</p>
+    <div class="checks">
+      <div class="row"><span class="box"></span><p>Review every medication and supplement for anything serotonergic first. If you take an antidepressant, stop here and talk to your prescriber.</p></div>
+      <div class="row"><span class="box"></span><p>Get screened for G6PD deficiency. It is a simple, inexpensive blood test and the only way to rule out an invisible risk.</p></div>
+      <div class="row"><span class="box"></span><p>Confirm pharmaceutical (USP) grade. If a source cannot show that, walk away.</p></div>
+      <div class="row"><span class="box"></span><p>Respect the low-dose ceiling. Remember the curve: there is no bonus for going higher, only harm.</p></div>
+      <div class="row"><span class="box"></span><p>Fix the foundation first. Methylene blue supports a system that already works. It cannot replace sleep, food, and movement.</p></div>
+      <div class="row"><span class="box"></span><p>Set an honest bar. Decide in advance what "it is working" would look like, and be willing to stop if it is not.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE TAKE -->
+<section class="band band--ink">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--plasma)">The BlessUp take</p>
+    <h2 style="color:#fff">A real molecule wearing a costume</h2>
+    <p>Most trend compounds are hype with no engine underneath. Methylene blue is the rarer case: a genuinely elegant mechanism and a century of medical use, dressed up in claims its human evidence has not earned yet, and carrying two risks the trend videos rarely mention.</p>
+    <p>So we hold two things at once. This is not snake oil, and it is not a miracle. It is a low-cost compound with a sound mechanism, promising but early human data, and two hard rules that make it either quietly useful or genuinely dangerous depending entirely on whether you respect them. If you screen your meds, screen for G6PD, use pharmaceutical grade, stay under the ceiling, and treat it as one support for a body you also feed and rest, it can earn a modest place. If you skip the rules and chase the hype up the dose, it will disappoint you or hurt you. The molecule is honest. Make sure the marketing around it is too.</p>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="band">
+  <div class="wrap footer">
+    <p class="small" style="max-width:62ch;margin:0 auto 18px">Education only, not medical advice. Methylene blue is FDA-approved for one specific condition; the energy and cognitive use is off-label. Doses mentioned are studied examples, not prescriptions. The MAO and G6PD rules are safety-critical. For research and educational purposes, adults 21 and over.</p>
+    <p class="sig">Keep the science, drop the costume.</p>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="band band--tint">
+  <div class="wrap sources">
+    <p class="eyebrow">The evidence</p>
+    <h2 style="font-size:26px">Sources</h2>
+    <p class="small">Human and preclinical evidence, verified on PubMed. The honest picture is a strong mechanism, promising early human data, and one notable clinical failure worth stating plainly.</p>
+    <ol>
+      <li>Rodriguez P, et al. Multimodal randomized functional MR imaging of the effects of methylene blue in the human brain. <em>Radiology.</em> 2016. The placebo-controlled trial in 26 healthy adults behind the memory and brain-activity claims. Via PubMed, PMID 27351678. <a href="https://pubmed.ncbi.nlm.nih.gov/27351678/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/27351678</a></li>
+      <li>Rodriguez P, et al. Methylene blue modulates functional connectivity in the human brain. <em>Brain Imaging Behav.</em> 2016. Via PubMed, PMID 26961091. <a href="https://pubmed.ncbi.nlm.nih.gov/26961091/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/26961091</a></li>
+      <li>Callaway NL, et al. Methylene blue improves brain oxidative metabolism and memory retention in rats. <em>Pharmacol Biochem Behav.</em> 2004. The foundational bioenergetic-to-cognition link. Via PubMed, PMID 15051156. <a href="https://pubmed.ncbi.nlm.nih.gov/15051156/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/15051156</a></li>
+      <li>Auchter A, et al. Methylene blue preserves cytochrome oxidase activity and prevents neurodegeneration and memory impairment (animal model). <em>J Alzheimers Dis.</em> 2014. Via PubMed, PMID 25079810. <a href="https://pubmed.ncbi.nlm.nih.gov/25079810/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/25079810</a></li>
+      <li>Alda M, et al. Methylene blue treatment for residual symptoms of bipolar disorder: randomised crossover study. <em>Br J Psychiatry.</em> 2017;210(1):54-60. Double-blind crossover, 37 participants; the active dose improved depression (MADRS P=0.02) and anxiety versus a low-dose comparator. The early human mood signal, kept in its clinical context. Via PubMed, PMID 27284082. <a href="https://pubmed.ncbi.nlm.nih.gov/27284082/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/27284082</a></li>
+      <li>Gauthier S, et al. Efficacy and safety of tau-aggregation inhibitor therapy (LMTM) in mild to moderate Alzheimer's disease: a randomised, controlled, double-blind Phase 3 trial. <em>The Lancet.</em> 2016. Failed its primary endpoints, the honest counterweight. Via PubMed, PMID 27863809. <a href="https://pubmed.ncbi.nlm.nih.gov/27863809/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/27863809</a></li>
+    </ol>
+    <p class="small">Also drawn on: FDA labeling for methylene blue (levomethylene blue / methylene blue injection) for methemoglobinemia, and the biphasic (hormetic) dose-response literature. The MAO-A inhibition and G6PD contraindications are established pharmacology. This report takes no position beyond what the cited evidence supports and does not recommend use.</p>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var prog=document.getElementById('prog');
+  function onScroll(){var h=document.documentElement;var s=(h.scrollTop||document.body.scrollTop);var ht=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(s/ht*100)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var tb=document.getElementById('themebtn');
+  if(tb){tb.addEventListener('click',function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var isDark=cur? cur==='dark':dark;
+    document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+  });}
+
+  // hormetic dose curve
+  var X0=40,X1=612,YBASE=150,AMP=64;
+  function v(d){ // benefit peaks ~32, crosses 0 ~68, negative after. d in 0..100
+    var x=d/100;
+    return (Math.sin(x*Math.PI*1.35 - 0.15) ) * (1 - x*0.15); // hump that dips negative at high x
+  }
+  function px(d){ return X0 + (d/100)*(X1-X0); }
+  function py(d){ var y=YBASE - v(d)*AMP; return Math.max(24, Math.min(224, y)); }
+  var pathEl=document.getElementById('curvePath');
+  (function buildCurve(){
+    var pts=[];
+    for(var d=0; d<=100; d+=2){ pts.push((d===0?'M':'L')+px(d).toFixed(1)+','+py(d).toFixed(1)); }
+    pathEl.setAttribute('d', pts.join(' '));
+  })();
+  var dot=document.getElementById('dot'), mk=document.getElementById('marker');
+  var slider=document.getElementById('doseSlider');
+  var zoneBox=document.getElementById('doseZone'), zoneBand=document.getElementById('zoneBand'), zoneText=document.getElementById('zoneText');
+  var ZONES=[
+    {max:12, cls:'dz-low', band:'Too low to matter', txt:'Below the active window there is little to feel. This is not the danger zone, it is just the quiet end where not much happens.'},
+    {max:45, cls:'dz-good', band:'Benefit window', txt:'The low-dose window where the electron-carrier and antioxidant effects show up. This is where the studied cognitive signal and the mitochondrial support live.'},
+    {max:60, cls:'dz-amber', band:'The ceiling', txt:'The top edge of useful. Push past here and you trade the benefit for growing risk, with no extra upside. This is the line people cross by accident.'},
+    {max:101, cls:'dz-danger', band:'Harm, not help', txt:'The same redox chemistry now generates damage instead of energy, and at high doses the risks of the two hard rules climb. More is not a stronger version of the benefit, it is a different, worse effect.'}
+  ];
+  function zoneFor(d){ for(var i=0;i<ZONES.length;i++){ if(d<ZONES[i].max) return ZONES[i]; } return ZONES[ZONES.length-1]; }
+  function update(d){
+    var x=px(d), y=py(d);
+    dot.setAttribute('cx',x.toFixed(1)); dot.setAttribute('cy',y.toFixed(1));
+    mk.setAttribute('x1',x.toFixed(1)); mk.setAttribute('x2',x.toFixed(1)); mk.setAttribute('y1',y.toFixed(1)); mk.setAttribute('y2','150');
+    var z=zoneFor(d);
+    zoneBox.className='dzone '+z.cls;
+    zoneBand.textContent=z.band;
+    zoneText.textContent=z.txt;
+    var col = z.cls==='dz-good'?'var(--good)': z.cls==='dz-amber'?'var(--amber)': z.cls==='dz-danger'?'var(--danger)':'var(--muted)';
+    dot.setAttribute('fill', col);
+  }
+  slider.addEventListener('input',function(){update(parseInt(slider.value,10));});
+  update(parseInt(slider.value,10));
+})();
+</script>

@@ -1,0 +1,431 @@
+<title>Is Your Peptide Even Real? Purity, Testing, and What Is Actually in the Vial - BlessUp</title>
+<!--
+  BlessUp interactive report - "Is Your Peptide Even Real?" (purity / testing / sourcing).
+  Thick Blood layout re-skinned to an analytical slate + cyan palette. Interactive test-explainer.
+  ASCII + HTML entities only. Education only. No vendor/brand names. No use-claims. Two-sided.
+  No em dashes. Peer-reviewed anchors PubMed-verified; market data flagged as investigative.
+-->
+<style>
+  :root{
+    --paper:#F1F3F5; --surface:#FBFCFD; --surface-2:#E7EBEF;
+    --ink:#161C24; --ink-soft:#39434F; --muted:#65707C;
+    --line:#D4DAE0; --line-soft:#E4E8EC;
+    --blood:#37506B; --blood-deep:#263A51; --blood-tint:#DEE4EB;   /* analytical slate = primary */
+    --plasma:#137F92; --plasma-soft:#AFD4DB; --plasma-tint:#D4EAEE; /* signal cyan */
+    --good:#2E7D57; --good-tint:#DBEAE1;
+    --amber:#976615; --amber-tint:#F1E4C6;
+    --danger:#B23129; --danger-deep:#8A241D; --danger-tint:#F3DAD6;
+    --serif:"Charter","Cambria","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:"Seravek","Segoe UI","Avenir Next","Helvetica Neue",system-ui,sans-serif;
+    --mono:ui-monospace,"Cascadia Code","SF Mono",Consolas,"Liberation Mono",monospace;
+    --wrap:740px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0D1116; --surface:#141A21; --surface-2:#1B222B;
+      --ink:#E7EBF0; --ink-soft:#B8C1CC; --muted:#7E8894;
+      --line:#28313C; --line-soft:#1D242D;
+      --blood:#6E92BE; --blood-deep:#93B2D6; --blood-tint:#152230;
+      --plasma:#3FAFC2; --plasma-soft:#123A42; --plasma-tint:#0E2830;
+      --good:#5CA980; --good-tint:#13271D;
+      --amber:#D2A24A; --amber-tint:#2A2110;
+      --danger:#E0685E; --danger-deep:#EE8C82; --danger-tint:#2E1513;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0D1116; --surface:#141A21; --surface-2:#1B222B;
+    --ink:#E7EBF0; --ink-soft:#B8C1CC; --muted:#7E8894;
+    --line:#28313C; --line-soft:#1D242D;
+    --blood:#6E92BE; --blood-deep:#93B2D6; --blood-tint:#152230;
+    --plasma:#3FAFC2; --plasma-soft:#123A42; --plasma-tint:#0E2830;
+    --good:#5CA980; --good-tint:#13271D;
+    --amber:#D2A24A; --amber-tint:#2A2110;
+    --danger:#E0685E; --danger-deep:#EE8C82; --danger-tint:#2E1513;
+  }
+  :root[data-theme="light"]{
+    --paper:#F1F3F5; --surface:#FBFCFD; --surface-2:#E7EBEF;
+    --ink:#161C24; --ink-soft:#39434F; --muted:#65707C;
+    --line:#D4DAE0; --line-soft:#E4E8EC;
+    --blood:#37506B; --blood-deep:#263A51; --blood-tint:#DEE4EB;
+    --plasma:#137F92; --plasma-soft:#AFD4DB; --plasma-tint:#D4EAEE;
+    --good:#2E7D57; --good-tint:#DBEAE1;
+    --amber:#976615; --amber-tint:#F1E4C6;
+    --danger:#B23129; --danger-deep:#8A241D; --danger-tint:#F3DAD6;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;background:var(--paper)}
+  body{margin:0;background:var(--paper)}
+  .page{position:relative;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.64;-webkit-font-smoothing:antialiased}
+  .page *{box-sizing:border-box}
+  ::selection{background:var(--blood-tint);color:var(--blood-deep)}
+  .prog{position:fixed;top:0;left:0;height:3px;width:0%;z-index:50;background:linear-gradient(90deg,var(--blood-deep),var(--plasma));transition:width .1s linear}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .band{padding:66px 0}
+  .band--tint{background:var(--surface-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+  .band--ink{background:#0A0E13;color:#E7EBF0;border-top:1px solid #24303c;border-bottom:1px solid #24303c}
+
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;text-wrap:balance;line-height:1.14;letter-spacing:-.005em}
+  h2{font-size:clamp(27px,4.4vw,38px);margin:0 0 .5em}
+  h3{font-size:clamp(21px,3vw,26px);margin:2.1em 0 .5em;line-height:1.2}
+  h4{font-size:19px;margin:1.6em 0 .3em;font-family:var(--sans);font-weight:700;letter-spacing:0}
+  p{margin:0 0 1.05em;max-width:66ch}
+  a{color:var(--blood);text-underline-offset:2px;text-decoration-thickness:1px}
+  a:hover{color:var(--blood-deep)}
+  strong{font-weight:700;color:var(--ink)}
+  em{font-style:italic}
+  .band--ink strong{color:#fff}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--blood);margin:0 0 14px;font-weight:600;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+  .lede{font-size:clamp(19px,2.5vw,22px);line-height:1.55;color:var(--ink-soft)}
+  .small{font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .src{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--muted);margin-top:10px}
+  ul,ol{margin:0 0 1.1em;padding-left:1.25em;max-width:66ch}
+  li{margin:.34em 0}
+  li::marker{color:var(--blood)}
+
+  .hero{padding:60px 0 52px;border-bottom:1px solid var(--line)}
+  .hero h1{font-size:clamp(38px,7vw,64px);margin:.04em 0 .3em;letter-spacing:-.02em;line-height:1.04;color:var(--blood-deep)}
+  .hero .thesis{font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.6vw,23px);color:var(--blood-deep);max-width:42ch;margin:.4em 0 0}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:40px 0 0;border-top:1px solid var(--line);padding-top:26px}
+  .stat{padding:0 22px}.stat:first-child{padding-left:0}
+  .stat+ .stat{border-left:1px solid var(--line)}
+  .stat .n{font-family:var(--serif);font-size:clamp(30px,5vw,44px);font-weight:600;color:var(--blood);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  .stat .n small{font-size:.42em;color:var(--ink-soft);font-weight:400}
+  .stat .lbl{font-size:12.5px;color:var(--muted);margin-top:11px;line-height:1.45}
+  @media(max-width:560px){.stats{grid-template-columns:1fr}.stat{padding:15px 0}.stat:first-child{padding-top:0}.stat+ .stat{border-left:0;border-top:1px solid var(--line)}}
+
+  .note{border-left:3px solid var(--plasma);background:var(--plasma-tint);padding:16px 20px;border-radius:0 6px 6px 0;margin:1.6em 0}
+  .note.blood{border-left-color:var(--blood);background:var(--blood-tint)}
+  .note.good{border-left-color:var(--good);background:var(--good-tint)}
+  .note.amber{border-left-color:var(--amber);background:var(--amber-tint)}
+  .note.danger{border-left-color:var(--danger);background:var(--danger-tint)}
+  .note p{margin:0;max-width:none}
+  .note .h{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 6px;color:var(--ink-soft)}
+
+  /* interactive test explainer */
+  .tester{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:24px;margin:1.8em 0;box-shadow:0 8px 30px rgba(15,20,30,.06)}
+  .tester .ctitle{font-family:var(--sans);font-weight:700;font-size:18px;margin:0 0 3px}
+  .tester .csub{font-size:13.5px;color:var(--muted);margin:0 0 16px}
+  .tests{display:flex;flex-wrap:wrap;gap:8px}
+  .tests button{font-family:var(--sans);font-size:13.5px;padding:9px 13px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink-soft);cursor:pointer;transition:.15s}
+  .tests button:hover{border-color:var(--blood)}
+  .tests button[aria-pressed="true"]{background:var(--blood);border-color:var(--blood);color:#fff;font-weight:600}
+  .texp{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .texp .cell{background:var(--surface-2);padding:15px 16px}
+  .texp .lab{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin:0 0 6px}
+  .texp .proves .lab{color:var(--good)}.texp .nots .lab{color:var(--danger-deep)}
+  .texp p{margin:0;font-size:14px;max-width:none;color:var(--ink-soft)}
+  .texp .what{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);margin:0 0 8px;grid-column:1 / -1;padding:14px 16px 0;background:var(--surface-2)}
+  @media(max-width:560px){.texp{grid-template-columns:1fr}}
+
+  .grade{display:grid;grid-template-columns:52px 1fr;gap:0;border:1px solid var(--line);border-radius:7px;overflow:hidden;margin:9px 0;background:var(--surface)}
+  .grade .g{display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:22px;font-weight:700;color:#fff;line-height:1}
+  .g-n{background:var(--blood)}
+  .grade .gc{padding:13px 18px}.grade .gc h4{margin:0 0 3px;font-size:16px}.grade .gc p{margin:0;font-size:14px;color:var(--ink-soft);max-width:none}
+
+  .lever{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin:16px 0}
+  .lever .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:2px}
+  .lever h3{margin:0;font-size:21px}
+  .lever .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:4px 9px;border-radius:4px;white-space:nowrap}
+  .tag.pro{background:var(--good-tint);color:var(--good)}.tag.con{background:var(--danger-tint);color:var(--danger-deep)}
+  .lever .mech{font-size:14.5px;color:var(--muted);margin:.3em 0 1em}
+  .pc{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line-soft)}
+  .pc .col{padding:14px 16px 6px}.pc .col.pro{border-right:1px solid var(--line-soft)}
+  .pc .col .lab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+  .pc .pro .lab{color:var(--good)}.pc .con .lab{color:var(--danger-deep)}
+  .pc ul{font-size:14px;padding-left:1.1em;margin:0 0 8px;max-width:none}.pc li{margin:.3em 0;color:var(--ink-soft)}
+  @media(max-width:600px){.pc{grid-template-columns:1fr}.pc .col.pro{border-right:none;border-bottom:1px solid var(--line-soft)}}
+
+  .checks{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 22px;margin:1.2em 0}
+  .checks .row{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line-soft);align-items:flex-start}
+  .checks .row:last-child{border-bottom:0}
+  .checks .box{flex:0 0 18px;width:18px;height:18px;border:2px solid var(--blood);border-radius:3px;margin-top:3px}
+  .checks .row p{margin:0;font-size:15.5px}
+
+  .flags{background:#20130F;border:1px solid rgba(224,104,94,.3);border-radius:10px;padding:24px 26px;color:#F3DCD6}
+  .flags h3{color:#F8E5DF;margin:0 0 8px}
+  .flags .lead{color:#EAC9C2;margin:0 0 12px;max-width:none;font-size:15px}
+  .flags ul{columns:2;column-gap:30px;max-width:none;padding-left:1.15em}
+  .flags li{color:#E4C6BF;margin:.4em 0;break-inside:avoid}
+  .flags li::marker{color:#E0685E}
+  @media(max-width:560px){.flags ul{columns:1}}
+
+  .sources{font-size:13.5px;line-height:1.5}
+  .sources ol{max-width:none;padding-left:1.6em}
+  .sources li{margin:.55em 0;color:var(--ink-soft)}.sources a{word-break:break-word}
+  .footer{padding:40px 0 60px;text-align:center}
+  .footer .sig{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--blood-deep)}
+  .themebtn{position:fixed;right:14px;bottom:14px;z-index:60;font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;background:var(--surface);color:var(--ink-soft);border:1px solid var(--line);border-radius:5px;padding:8px 13px;cursor:pointer;box-shadow:0 3px 12px rgba(15,20,30,.14)}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="page">
+<div class="prog" id="prog"></div>
+<button class="themebtn" id="themebtn" type="button" aria-label="Toggle light or dark">Theme</button>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">The Peptide Library &middot; Sourcing &amp; Safety</p>
+    <h1>Is your peptide even real?</h1>
+    <p class="lede" style="max-width:44ch;margin:.1em 0 .5em">What is actually in the vial, how you would ever know, and why a clean certificate proves less than you think.</p>
+    <p class="thesis">In an unregulated market, a lab result is only as honest as the lab, the sample, and the tests they chose to run. Most of the time, you are trusting a PDF.</p>
+    <div class="stats">
+      <div class="stat"><span class="n">~1<small> in 3</small></span><div class="lbl">Unregulated products that failed basic quality checks at independent labs, by identity, purity, or dose</div></div>
+      <div class="stat"><span class="n">1<small> of 5</small></span><div class="lbl">Sourced research peptides that turned out to be a completely different peptide, in a peer-reviewed study</div></div>
+      <div class="stat"><span class="n">~$8</span><div class="lbl">Estimated amount the average buyer now spends verifying a product, as independent testing collapsed</div></div>
+    </div>
+    <p class="src">Failure rates: independent testing labs, 2024-2026 (investigative reporting). "1 of 5 was a different peptide": De Spiegeleer 2008, peer-reviewed. Sources at the end.</p>
+  </div>
+</header>
+
+<!-- OPENER -->
+<section class="band">
+  <div class="wrap">
+    <p class="lede">Somewhere between a viral video and a vial in the mail, a quiet question gets skipped: is the powder inside actually what the label says? In a legal medicine, a chain of regulation answers that for you. In the gray market, nobody does, and the honest answer is that a surprising amount of the time, it is not.</p>
+    <p>This report is not about whether to use anything. It is about how you would even know what you have. It walks through what the tests actually prove, what a certificate of analysis can and cannot tell you, the ways gray-market product fails, and the one truth no test can ever give you. It names no vendors and endorses nothing. It is the literacy, not the shopping list.</p>
+    <div class="note">
+      <p class="h">Read this first</p>
+      <p>This is general education about testing and sourcing, not medical advice and not a recommendation to buy, use, or inject any unapproved compound. It names no suppliers, labs, or brands as recommendations. Many of the compounds discussed in this space are not approved and carry their own risks regardless of purity. Route any personal decision through a qualified provider. For research and educational purposes, adults 21 and over.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">Why this matters more than it used to</p>
+    <h2>The market grew up, and the checking fell apart</h2>
+    <p>Two things changed fast. The gray market exploded from a niche into a mainstream, on-chain economy worth many tens of millions a year, with reporting documenting that some suppliers pivoted from selling drug precursors to selling peptides straight to consumers. At the same time, the culture shifted. The early crowd had a harm-reduction ethic and independently retested what they bought. The viral wave that followed mostly trusts whatever certificate the seller provides and does not verify anything.</p>
+    <p>That is the dangerous combination. More product, more buyers, and far less independent checking, which means low-quality and genuinely unsafe material now moves easily alongside the good stuff, and the average buyer has less real protection than the crowd that came before them.</p>
+  </div>
+</section>
+
+<!-- TEST EXPLAINER (interactive) -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">What the tests actually prove</p>
+    <h2>Every test answers one question, and ignores the rest</h2>
+    <p>A certificate that shows two tests passing tells you nothing about the five it did not run. Tap each test to see exactly what it proves, and what it quietly leaves open.</p>
+
+    <div class="tester">
+      <p class="ctitle">The test explainer</p>
+      <p class="csub">Most gray-market certificates run only the first two. The others are where the real safety questions live.</p>
+      <div class="tests" id="tests">
+        <button data-i="0" aria-pressed="true">Identity (mass spec)</button>
+        <button data-i="1">Purity (HPLC)</button>
+        <button data-i="2">Net peptide content</button>
+        <button data-i="3">Heavy metals</button>
+        <button data-i="4">Endotoxin</button>
+        <button data-i="5">Sterility</button>
+      </div>
+      <div class="texp" id="texp">
+        <div class="what" id="tWhat"></div>
+        <div class="cell proves"><p class="lab">What it proves</p><p id="tProves"></p></div>
+        <div class="cell nots"><p class="lab">What it does NOT prove</p><p id="tNots"></p></div>
+      </div>
+    </div>
+    <div class="note blood">
+      <p class="h">The trap in one line</p>
+      <p>A vial can pass identity and purity, the only two tests most certificates run, and still be non-sterile, laced with endotoxin or heavy metals, and only two-thirds peptide by weight. A clean certificate on the easy tests is not a clean bill of health.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NET PEPTIDE CONTENT -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">The most misunderstood number</p>
+    <h2>99% pure does not mean 99% peptide</h2>
+    <p>This one trips up almost everyone, and it is not fraud, it is chemistry. The freeze-dried powder in the vial is never all peptide. It also carries the salts left over from purification, absorbed water, and traces of solvent. So there are two completely different numbers, and people constantly confuse them.</p>
+    <ul>
+      <li><strong>Purity (by HPLC)</strong> tells you what fraction of the <em>peptide</em> in there is the right sequence. "99% pure" means the peptide is 99% the target.</li>
+      <li><strong>Net peptide content</strong> tells you what fraction of the <em>total powder</em> is peptide at all, typically 60 to 90 percent.</li>
+    </ul>
+    <div class="note amber">
+      <p class="h">What that means for your dose</p>
+      <p>A vial labeled 5 mg at 99% purity can hold only about 3.5 to 4.5 mg of actual peptide once the salts and water are subtracted. Almost no consumer certificate reports net peptide content, so without it you genuinely do not know how much active compound you are reconstituting. The purity number can be perfect and your real dose can still be off by a third.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COA LIMITS -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">The document everyone waves around</p>
+    <h2>Five things a certificate of analysis cannot do</h2>
+    <p>A certificate of analysis, or COA, is a lab report for one batch: purity, identity, a lot number, a date, a lab name. It is useful. It is also routinely misread as a guarantee, and it is not one. Here is what it cannot do, no matter how clean it looks.</p>
+    <div class="grade"><div class="g g-n">1</div><div class="gc"><h4>It is only as good as the lab</h4><p>A certificate from the seller's own in-house lab has a built-in conflict of interest. Only a named, accredited, independently verifiable third-party lab carries real weight.</p></div></div>
+    <div class="grade"><div class="g g-n">2</div><div class="gc"><h4>It is only as good as the sample</h4><p>A seller can test one pristine batch and ship a different or degraded one. The certificate is a snapshot of one sample at one moment, not a promise about the vial in your hand.</p></div></div>
+    <div class="grade"><div class="g g-n">3</div><div class="gc"><h4>It can simply be faked</h4><p>In an unregulated market nothing stops a vendor from posting a forged, recycled, or borrowed certificate, or using one batch's result to represent another compound entirely.</p></div></div>
+    <div class="grade"><div class="g g-n">4</div><div class="gc"><h4>It usually skips what matters most</h4><p>The typical certificate covers purity and identity and omits sterility, endotoxin, heavy metals, residual solvents, and net peptide content. A clean result on two tests says nothing about the other five.</p></div></div>
+    <div class="grade"><div class="g g-n">5</div><div class="gc"><h4>Purity is not safety</h4><p>A 99% pure peptide can still be the wrong sequence for you, biologically inactive, contaminated, or degraded. Purity is necessary and nowhere near sufficient.</p></div></div>
+    <div class="note">
+      <p class="h">A red flag worth memorizing</p>
+      <p>Be suspicious of certificates that read exactly 99.0% on every batch of every compound. Real testing has variation. Suspiciously identical numbers suggest a reference standard was tested, or the document was fabricated, rather than your actual batch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAILURES -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">This is not hypothetical</p>
+    <h2>What independent testing has actually found</h2>
+    <p>The strongest peer-reviewed evidence and the recent investigations point the same way. When people actually test what is sold, a meaningful share fails.</p>
+    <ul>
+      <li><strong>An outright wrong molecule.</strong> In a peer-reviewed study, obestatin peptides were bought from five suppliers used by real research groups. One was a completely different peptide, and two-thirds of the rest were too impure for valid experiments. If formal research supply fails like that, the consumer market is not going to be cleaner.</li>
+      <li><strong>Fake product in the wild.</strong> A 2026 investigation that bought and independently tested products across vendor tiers found budget-tier "semaglutide" that was not semaglutide at all, by mass, plus purities in the 70s against 99% claims, and endotoxin many times a pharmaceutical baseline. The seller's site vanished within two weeks.</li>
+      <li><strong>Passing the easy tests, failing the hard one.</strong> Reporting documented a hyped batch that passed the seller's purity and mass certificates but failed sterility when a cautious buyer submitted it independently. It rattled the veterans and barely dented the viral market.</li>
+      <li><strong>Impurities are not cosmetic.</strong> A regulatory review notes that peptide impurities cannot be judged like small-molecule ones, because these larger molecules can interact with the body in complex ways, so a specific impurity can carry a specific hazard.</li>
+    </ul>
+    <p class="small">The market-scale and failure-rate figures here come from investigative reporting and testing labs, not peer-reviewed studies, which is itself worth saying plainly. No comprehensive peer-reviewed survey of gray-market purity exists. We flag that honestly rather than dress the numbers up as something they are not.</p>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Education, not endorsement</p>
+    <h2>What careful people actually look for</h2>
+    <p>Framed as literacy, not a shopping guide. Nothing here recommends buying, using, or injecting any unapproved compound.</p>
+    <div class="checks">
+      <div class="row"><span class="box"></span><p>An independent, named, accredited lab, verifiable through a source you found yourself, not a lab name printed on the certificate you are trying to check.</p></div>
+      <div class="row"><span class="box"></span><p>A batch number on the certificate that exactly matches the number on the physical vial. A generic or batchless certificate verifies nothing about your product.</p></div>
+      <div class="row"><span class="box"></span><p>A full panel, not just purity and identity: the actual HPLC chromatogram image, endotoxin, heavy metals, residual solvents, and ideally net peptide content.</p></div>
+      <div class="row"><span class="box"></span><p>Storage and cold chain that make sense. A certificate describes the product at testing time, not after a hot warehouse or a slow international shipment.</p></div>
+      <div class="row"><span class="box"></span><p>Recognition that the clock starts at reconstitution. A peptide that was pure in the vial degrades once it is mixed and sitting in a fridge, so the original number stops describing it.</p></div>
+      <div class="row"><span class="box"></span><p>An honest read on the words. "Research grade," "pharmaceutical grade," and "lab tested" have no legal meaning here without a named lab and a batch-matched result.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTH SIDES -->
+<section class="band band--tint">
+  <div class="wrap">
+    <p class="eyebrow">Both sides, fairly</p>
+    <h2>Testing helps, and testing is not enough</h2>
+    <p>Two true things, and the space between them is where honest sourcing lives.</p>
+    <div class="lever">
+      <div class="top"><h3>Careful sourcing genuinely lowers risk</h3><span class="tag pro">True</span></div>
+      <p class="mech">The quality gulf between tiers is real and measurable, not a feeling.</p>
+      <div class="pc">
+        <div class="col pro"><div class="lab">Strong points</div><ul>
+          <li>Tested product from accredited facilities really does hit far cleaner purity, endotoxin, and metals than budget product</li>
+          <li>Independently verifying a batch gives you vastly more information than trusting a PDF</li>
+          <li>Vendors who invite testing and answer hard questions tend to deliver better material</li>
+        </ul></div>
+        <div class="col con"><div class="lab">What this side skips</div><ul>
+          <li>Clean manufacturing is not the same as a safe compound</li>
+          <li>Even good testing cannot verify long-term biological safety</li>
+          <li>Most buyers are not actually doing independent testing at all</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="lever">
+      <div class="top"><h3>No test makes an unapproved compound "safe"</h3><span class="tag con">Also true</span></div>
+      <p class="mech">A certificate is a manufacturing document, not a safety document.</p>
+      <div class="pc">
+        <div class="col pro"><div class="lab">Strong points</div><ul>
+          <li>A 99.9% pure peptide with zero contaminants can still have unknown long-term toxicity</li>
+          <li>Many popular gray-market compounds have little or no human safety data at all</li>
+          <li>Regulators cite immunogenicity and impurity risks as formal reasons for restriction</li>
+        </ul></div>
+        <div class="col con"><div class="lab">What this side skips</div><ul>
+          <li>Purity still matters, a contaminated product is worse than a clean one</li>
+          <li>"Unproven" is not the same as "proven harmful"</li>
+          <li>Literacy is protective even when the underlying choice is risky</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MYTHS -->
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Cutting through the noise</p>
+    <h2>What people get wrong</h2>
+    <ul>
+      <li><strong>Trusting the seller's own certificate.</strong> The most common mistake, and it is getting worse. A result from the vendor's in-house lab has a conflict of interest baked in. An unnamed "third-party lab" is not a verified claim.</li>
+      <li><strong>Thinking a clean certificate means it works, or is safe.</strong> Purity and identity say what is in the vial. They say nothing about whether it helps you, whether the dose is right, or whether it harms you over time.</li>
+      <li><strong>Confusing purity with dose.</strong> 99% pure is not 99% peptide by weight. Skip net peptide content and you can be reconstituting a third less active compound than you think.</li>
+      <li><strong>Ignoring storage and reconstitution.</strong> The certificate describes the powder at testing time. Heat, light, tap water, and freeze-thaw cycles can make it irrelevant fast.</li>
+      <li><strong>Believing price signals quality.</strong> In an unregulated market it does not. Some budget vendors charge premium prices, and cost is not a reliable quality cue.</li>
+      <li><strong>Stacking several untested compounds at once.</strong> If something helps or harms, you cannot tell which one did it, and the combined impurity burden and interactions are completely unknown.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- THE TAKE -->
+<section class="band band--ink">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--plasma)">The BlessUp take</p>
+    <h2 style="color:#fff">Literacy is the only protection nobody can sell you</h2>
+    <p>We are not here to tell you what to put in your body. We are here to make sure that if you are going to navigate this world, you can read it. Because the uncomfortable truth is that in an unregulated market, the certificate everyone treats as proof is often the weakest link, and the number people trust most, purity, is the one that hides the most.</p>
+    <p>So hold two things. Careful sourcing, real independent testing, and understanding what each test does and does not prove genuinely lower your risk, and that is worth real effort. And no amount of testing turns an unapproved compound with no human safety data into a safe one, because a certificate describes what was made, not what it does inside you. Know the difference between a clean manufacturing document and an actual guarantee of safety, treat every unnamed lab and identical 99% as the red flags they are, and remember that the most valuable thing here is not a vendor or a product. It is the ability to ask the right question and not be satisfied with a pretty PDF.</p>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="band">
+  <div class="wrap footer">
+    <p class="small" style="max-width:62ch;margin:0 auto 18px">Education only, not medical advice, and not a recommendation to buy, use, or inject any unapproved compound. No suppliers, labs, or brands are named or endorsed. Testing addresses manufacturing quality, not biological safety, and many compounds in this space are unapproved. For research and educational purposes, adults 21 and over.</p>
+    <p class="sig">Read the vial, not the promise.</p>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="band band--tint">
+  <div class="wrap sources">
+    <p class="eyebrow">The record</p>
+    <h2 style="font-size:26px">Sources</h2>
+    <p class="small">Peer-reviewed anchors are PubMed-verified. Market-scale and failure-rate figures come from investigative reporting and testing labs and are flagged as such, since no comprehensive peer-reviewed survey of gray-market peptide purity exists.</p>
+    <ol>
+      <li>De Spiegeleer B, Vergote V, Pezeshki A, et al. Impurity profiling quality control testing of synthetic peptides, the obestatin case. <em>Anal Biochem.</em> 2008;376(2):229-234. One of five sourced peptides was a totally different peptide; two-thirds were insufficient quality. Via PubMed, PMID 18342612. <a href="https://doi.org/10.1016/j.ab.2008.02.014" target="_blank" rel="noopener">doi:10.1016/j.ab.2008.02.014</a></li>
+      <li>Colalto C. Aspects of complexity in quality and safety assessment of peptide therapeutics and peptide-related impurities, a regulatory perspective. <em>Regul Toxicol Pharmacol.</em> 2024;153:105699. Peptide impurities can carry specific hazards and cannot be judged like small molecules. Via PubMed, PMID 39243929. <a href="https://doi.org/10.1016/j.yrtph.2024.105699" target="_blank" rel="noopener">doi:10.1016/j.yrtph.2024.105699</a></li>
+      <li>US FDA. Certain Bulk Drug Substances for Use in Compounding That May Present Significant Safety Risks (Category 2), citing risk of immunogenicity, peptide-related impurities, and limited safety information. September 2023. <a href="https://www.fda.gov/drugs/human-drug-compounding/certain-bulk-drug-substances-use-compounding-may-present-significant-safety-risks" target="_blank" rel="noopener">fda.gov, bulk substances Category 2</a></li>
+      <li>The Guardian. Investigations into the injectable-peptide craze and lab testing of unregulated substances (the roughly one-third failure rate, expert commentary). February and April 2026. <a href="https://www.theguardian.com/science/2026/apr/06/labs-testing-thousands-of-unregulated-substances-amid-peptide-craze" target="_blank" rel="noopener">theguardian.com</a></li>
+      <li>Chainalysis. On-chain analysis of the gray-market peptide economy, market scale, supplier pivot, the collapse of independent testing, and a documented sterility-failure case. June 2026. <a href="https://www.chainalysis.com/blog/" target="_blank" rel="noopener">chainalysis.com, blog</a></li>
+      <li>Investigative product testing across vendor tiers (a 2026 independent purchase-and-test investigation documenting a wrong-compound "semaglutide," sub-label purities, and elevated endotoxin and heavy metals). Community investigation, not peer-reviewed. <em>Cited as investigative, not clinical evidence.</em></li>
+    </ol>
+    <p class="small">Technical background on net peptide content, certificate-of-analysis interpretation, and laboratory accreditation (ISO 17025) is drawn from standard analytical references. This report names no vendors, labs, or brands as recommendations, takes no position on the use of any compound, and does not recommend use.</p>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var prog=document.getElementById('prog');
+  function onScroll(){var h=document.documentElement;var s=(h.scrollTop||document.body.scrollTop);var ht=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(s/ht*100)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tb=document.getElementById('themebtn');
+  if(tb){tb.addEventListener('click',function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var isDark=cur? cur==='dark':dark;
+    document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+  });}
+
+  var TESTS=[
+    {w:'Identity, by mass spectrometry',p:'Confirms the molecule weighs what the target peptide should, so it is the compound you ordered and not something else.',n:'Says nothing about how pure it is, whether it is biologically active, or whether it is folded correctly. A loose tolerance can even hide a truncated or substituted sequence.'},
+    {w:'Purity, by HPLC',p:'Shows what fraction of the peptide present is the correct sequence, read off a chromatogram. "98.5% by HPLC" is this number.',n:'Does not tell you what fraction of the powder is peptide at all, and detects no endotoxin, no living microbes, and no heavy metals.'},
+    {w:'Net peptide content',p:'The fraction of the total powder that is actually peptide, typically 60 to 90 percent, the rest being salts and water. This is what sets your real dose.',n:'Almost never appears on consumer certificates. Without it, a perfect purity number still leaves your true dose unknown.'},
+    {w:'Heavy metals, by ICP-MS',p:'Screens for lead, mercury, arsenic, and cadmium down to trace levels that can come from cheap reagents or poor equipment.',n:'Rarely run on gray-market certificates at all. Its absence means a real safety layer was simply skipped.'},
+    {w:'Endotoxin, by LAL assay',p:'Measures bacterial toxin, the kind that can cause fever and severe reactions in an injectable, against a defined safe limit.',n:'Passing does not mean the product is sterile. A product can be under the endotoxin limit and still contain living microbes.'},
+    {w:'Sterility',p:'Confirms there are no viable bacteria, fungi, or yeast, through incubation over about two weeks. The test that a hyped batch famously failed after passing the others.',n:'Does not cover endotoxin left behind by bacteria that were already killed. Sterile is not the same as endotoxin-free.'}
+  ];
+  var testsWrap=document.getElementById('tests');
+  var tWhat=document.getElementById('tWhat'), tProves=document.getElementById('tProves'), tNots=document.getElementById('tNots');
+  function show(i){
+    var t=TESTS[i];
+    tWhat.textContent=t.w; tProves.textContent=t.p; tNots.textContent=t.n;
+    testsWrap.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed', b.getAttribute('data-i')==(''+i)?'true':'false');});
+  }
+  testsWrap.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){show(parseInt(b.getAttribute('data-i'),10));});});
+  show(0);
+})();
+</script>
